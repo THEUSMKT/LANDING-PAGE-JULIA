@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- SEO: os crawlers do Google, WhatsApp e Instagram leem este <head> sem rodar JavaScript,
+       por isso [CIDADE] e [SEU-DOMINIO] precisam ser trocados aqui à mão. -->
+  <title>Júlia Cardoso | Maquiadora em [CIDADE] — Julia Studio Makeup</title>
+  <meta name="description" content="Maquiagem profissional em [CIDADE] para noivas, madrinhas, formaturas, 15 anos, festas e ensaios. Atendimento exclusivo, uma cliente por vez. Agende pelo WhatsApp.">
+  <meta name="theme-color" content="#140E0F">
+  <meta name="color-scheme" content="dark">
+  <!-- Descomente quando o domínio estiver definido:
+  <link rel="canonical" href="https://[SEU-DOMINIO]/">
+  -->
+
+  <!-- Open Graph / compartilhamento -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Julia Studio Makeup">
+  <meta property="og:title" content="Júlia Cardoso | Maquiadora em [CIDADE]">
+  <meta property="og:description" content="Maquiagem que realça a sua beleza, sem esconder quem você é. Atendimento exclusivo para noivas, madrinhas, formaturas, festas e ensaios.">
+  <meta property="og:url" content="https://[SEU-DOMINIO]/">
+  <meta property="og:image" content="https://[SEU-DOMINIO]/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Logo da Julia Studio Makeup em rose gold sobre fundo escuro">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Júlia Cardoso | Maquiadora em [CIDADE]">
+  <meta name="twitter:description" content="Maquiagem que realça a sua beleza, sem esconder quem você é. Agende pelo WhatsApp.">
+  <meta name="twitter:image" content="https://[SEU-DOMINIO]/assets/img/og-image.jpg">
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <!-- Google Fonts (display=swap) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    // Marca que o JS está ativo (as animações só escondem conteúdo quando há JS).
+    document.documentElement.classList.add('js');
+
+    // Fallback de fotos: tenta WebP -> JPG -> placeholder elegante.
+    // Fica aqui no <head> para existir antes de qualquer imagem falhar.
+    window.jsFotoErro = function (img) {
+      var pic = img.parentNode;
+      if (pic && pic.tagName === 'PICTURE' && pic.querySelector('source')) {
+        // WebP ainda não gerado: usa o JPG original.
+        Array.prototype.forEach.call(pic.querySelectorAll('source'), function (s) { s.remove(); });
+        img.src = img.getAttribute('src');
+        return;
+      }
+      img.onerror = null;
+      img.style.display = 'none';
+      var foto = img.closest('.foto');
+      if (foto) foto.classList.add('sem-foto');
+    };
+
+    // Enquanto o logo.png não for colocado, usa o monograma provisório.
+    window.jsLogoErro = function (img) {
+      img.onerror = null;
+      img.src = 'assets/img/logo-provisorio.png';
+    };
+  </script>
+
+  <!-- Dados estruturados (schema.org). Troque os valores entre colchetes. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Julia Studio Makeup",
+    "alternateName": "Júlia Cardoso Maquiadora",
+    "description": "Maquiagem profissional para noivas, madrinhas, formaturas, 15 anos, festas e ensaios fotográficos, com atendimento exclusivo e personalizado.",
+    "url": "https://[SEU-DOMINIO]/",
+    "image": "https://[SEU-DOMINIO]/assets/img/og-image.jpg",
+    "logo": "https://[SEU-DOMINIO]/assets/img/logo.png",
+    "telephone": "+55[DDD][NUMERO]",
+    "areaServed": "[CIDADE/REGIÃO]",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "[CIDADE]",
+      "addressRegion": "[UF]",
+      "addressCountry": "BR"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Júlia Cardoso",
+      "jobTitle": "Maquiadora profissional"
+    },
+    "sameAs": ["https://instagram.com/[USUARIO]"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Serviços de maquiagem",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Maquiagem social e para festas" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Maquiagem para noivas" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Maquiagem para madrinhas e formandas" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Maquiagem para 15 anos" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Maquiagem para ensaios fotográficos" } }
+      ]
+    }
+  }
+  </script>
+
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- Ícones SVG (reutilizados com <use href="#...">) -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-estrela" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/></g><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></symbol>
+    <symbol id="i-seta-esq" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-seta-dir" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-fechar" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-ramo" viewBox="0 0 200 300"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M100 296C96 236 106 176 102 118S98 46 100 14"/><path d="M99 246C72 242 48 222 36 194C62 196 86 214 99 246Z"/><path d="M99 246C78 230 58 212 36 194"/><path d="M102 206C128 200 150 180 160 152C134 156 112 174 102 206Z"/><path d="M102 206C122 188 142 170 160 152"/><path d="M103 166C78 156 62 134 58 106C82 114 98 136 103 166Z"/><path d="M103 166C88 146 72 126 58 106"/><path d="M102 124C124 114 140 92 144 66C122 76 106 96 102 124Z"/><path d="M102 124C116 104 130 86 144 66"/><path d="M100 84C84 74 74 56 74 36C90 46 100 62 100 84Z"/><path d="M100 60C92 46 92 30 100 12C108 30 108 46 100 60Z"/></g></symbol>
+    <!-- Ícones dos diferenciais (traço fino) -->
+    <symbol id="i-conversa" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h22a4 4 0 0 1 4 4v11a4 4 0 0 1-4 4H18l-7 6v-6H8a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4Z"/><path d="M38 17h2a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-2v5l-6-5h-8a4 4 0 0 1-3.6-2.3"/><path d="M12 19.5h.01M19 19.5h.01M26 19.5h.01" stroke-width="2.6"/></g></symbol>
+    <symbol id="i-pele" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 6c6 8 12 15 12 22a12 12 0 0 1-24 0c0-7 6-14 12-22Z"/><path d="M16 30a6 6 0 0 0 6 6"/></g><path fill="currentColor" d="M39 6c.4 3.2 1.6 4.5 4.8 4.8-3.2.4-4.4 1.6-4.8 4.8-.4-3.2-1.6-4.4-4.8-4.8 3.2-.3 4.4-1.6 4.8-4.8Z"/></symbol>
+    <symbol id="i-ampulheta" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 6h22M13 42h22"/><path d="M16 6c0 9 8 12 8 18s-8 9-8 18M32 6c0 9-8 12-8 18s8 9 8 18"/><path d="M19.5 38.5c2.5-2.4 6.5-2.4 9 0"/></g></symbol>
+    <symbol id="i-pincel" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 40.5 20 28l4 4-12.5 12.5a2.8 2.8 0 0 1-4-4Z"/><path d="m20 28 4.5-4.5 4 4L24 32"/><path d="M24.5 23.5C25 16 30 9 40 6c-1 9-6 15-11.5 21.5"/></g><path fill="currentColor" d="M38 30c.4 3.2 1.6 4.5 4.8 4.8-3.2.4-4.4 1.6-4.8 4.8-.4-3.2-1.6-4.4-4.8-4.8 3.2-.3 4.4-1.6 4.8-4.8Z"/></symbol>
+    <symbol id="i-relogio" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="25" r="17"/><path d="M24 15v10l7 5"/><path d="M19 4h10"/></g></symbol>
+    <symbol id="i-camera" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="14" width="40" height="27" rx="4"/><path d="m16 14 3-5h10l3 5"/><circle cx="24" cy="27.5" r="7.5"/></g><path fill="currentColor" d="M38 18.5c.25 2 1 2.8 3 3-2 .3-2.75 1-3 3-.3-2-1-2.7-3-3 2-.2 2.7-1 3-3Z"/></symbol>
+  </svg>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a class="marca" href="#inicio" aria-label="Julia Studio Makeup, voltar ao início">
+        <img class="marca__logo" src="assets/img/logo.png" width="44" height="44" alt="" onerror="jsLogoErro(this)">
+        <span class="marca__nome" aria-hidden="true">Julia Studio</span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <ul class="nav__lista">
+          <li><a href="#portfolio">Portfólio</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#duvidas">Dúvidas</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__acoes">
+        <a class="btn btn--primario btn--sm" href="#agendar" data-wa="padrao" data-origem="header">
+          <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+          Agendar
+        </a>
+        <button class="hamburguer" type="button" aria-expanded="false" aria-controls="menu-mobile" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menu mobile (overlay) -->
+  <div class="menu-mobile" id="menu-mobile">
+    <svg class="ramo menu-mobile__ramo" aria-hidden="true"><use href="#i-ramo"/></svg>
+    <nav aria-label="Menu">
+      <ul class="menu-mobile__lista">
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#duvidas">Dúvidas</a></li>
+      </ul>
+    </nav>
+    <div class="divisor" aria-hidden="true"><span></span><svg><use href="#i-estrela"/></svg><span></span></div>
+    <a class="btn btn--primario" href="#agendar" data-wa="padrao" data-origem="menu-mobile">
+      <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+      Agendar pelo WhatsApp
+    </a>
+    <a class="link-insta" href="#" data-instagram data-origem="menu-mobile">
+      <svg aria-hidden="true"><use href="#i-instagram"/></svg> Ver no Instagram
+    </a>
+  </div>
+
+  <main id="conteudo">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+      <div class="hero__luz" aria-hidden="true"></div>
+      <div class="container hero__grade">
+        <div class="hero__texto">
+          <p class="eyebrow entrada" style="--i:0">
+            Maquiagem profissional
+            <svg class="eyebrow__estrela" aria-hidden="true"><use href="#i-estrela"/></svg>
+            <span data-cidade>[CIDADE]</span>
+          </p>
+          <h1 class="hero__titulo entrada" id="hero-titulo" style="--i:1">
+            Maquiagem que realça a sua beleza — <em class="metal metal--brilho">sem esconder quem você é.</em>
+          </h1>
+          <p class="hero__sub entrada" style="--i:2">
+            Sou a Júlia Cardoso e crio makes pensadas no seu rosto, no seu estilo e no seu momento.
+            Para noivas, madrinhas, formaturas, festas e ensaios.
+          </p>
+          <div class="hero__botoes entrada" style="--i:3">
+            <a class="btn btn--primario btn--lg" href="#agendar" data-wa="padrao" data-origem="hero">
+              <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              Quero agendar minha make
+            </a>
+            <a class="btn btn--secundario btn--lg" href="#portfolio">Ver meus trabalhos</a>
+          </div>
+          <ul class="confianca entrada" style="--i:4" aria-label="Como é o atendimento">
+            <li><svg aria-hidden="true"><use href="#i-estrela"/></svg>Atendimento com hora marcada</li>
+            <li><svg aria-hidden="true"><use href="#i-estrela"/></svg>Uma cliente por vez</li>
+            <li><svg aria-hidden="true"><use href="#i-estrela"/></svg>Make personalizada</li>
+          </ul>
+        </div>
+
+        <div class="hero__foto entrada" style="--i:2">
+          <figure class="arco">
+            <div class="arco__foto foto">
+              <span class="foto__ph" aria-hidden="true">
+                <svg><use href="#i-estrela"/></svg>
+                <span>Foto da Júlia 1</span>
+              </span>
+              <picture>
+                <source type="image/webp" srcset="assets/img/julia-1-800.webp 800w, assets/img/julia-1-1600.webp 1600w" sizes="(min-width: 960px) 440px, 340px">
+                <img src="assets/img/julia-1.jpg" width="800" height="1000" alt="Júlia Cardoso, maquiadora da Julia Studio Makeup" fetchpriority="high" onerror="jsFotoErro(this)">
+              </picture>
+            </div>
+          </figure>
+          <div class="glints" aria-hidden="true">
+            <svg class="glint" style="--x:-7%;--y:10%;--t:18px"><use href="#i-estrela"/></svg>
+            <svg class="glint" style="--x:102%;--y:6%;--t:12px"><use href="#i-estrela"/></svg>
+            <svg class="glint" style="--x:-12%;--y:52%;--t:10px"><use href="#i-estrela"/></svg>
+            <svg class="glint" style="--x:106%;--y:44%;--t:20px"><use href="#i-estrela"/></svg>
+            <svg class="glint" style="--x:2%;--y:92%;--t:14px"><use href="#i-estrela"/></svg>
+            <svg class="glint" style="--x:94%;--y:86%;--t:11px"><use href="#i-estrela"/></svg>
+            <svg class="glint" style="--x:78%;--y:-5%;--t:9px"><use href="#i-estrela"/></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAIXA DE OCASIÕES ============ -->
+    <div class="faixa">
+      <p class="sr-only">Maquiagem para noivas, madrinhas, formaturas, 15 anos, festas, ensaios fotográficos e eventos.</p>
+      <div class="faixa__trilho" aria-hidden="true">
+        <ul class="faixa__lista">
+          <li>Noivas</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>Madrinhas</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>Formaturas</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>15 anos</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>Festas</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>Ensaios fotográficos</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>Eventos</li><li><svg><use href="#i-estrela"/></svg></li>
+        </ul>
+        <ul class="faixa__lista">
+          <li>Noivas</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>Madrinhas</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>Formaturas</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>15 anos</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>Festas</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>Ensaios fotográficos</li><li><svg><use href="#i-estrela"/></svg></li>
+          <li>Eventos</li><li><svg><use href="#i-estrela"/></svg></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============ PORTFÓLIO ============ -->
+    <section class="secao portfolio" id="portfolio" aria-labelledby="portfolio-titulo">
+      <div class="container">
+        <header class="secao__cabecalho revelar">
+          <p class="eyebrow">Portfólio</p>
+          <h2 class="titulo" id="portfolio-titulo">Cada rosto, <em class="metal">uma make única.</em></h2>
+          <div class="divisor" aria-hidden="true"><span></span><svg><use href="#i-estrela"/></svg><span></span></div>
+          <p class="secao__texto">Alguns dos trabalhos que já fiz. Nenhuma make é igual à outra, porque nenhuma cliente é.</p>
+        </header>
+
+        <!-- A grade é montada pelo js/main.js a partir de CONFIG.portfolio -->
+        <ul class="portfolio__grade" id="portfolio-grade" data-escalonar></ul>
+        <noscript><p class="secao__texto">Ative o JavaScript para ver o portfólio.</p></noscript>
+
+        <div class="portfolio__acoes revelar">
+          <a class="btn btn--primario btn--lg" href="#agendar" data-wa="portfolio" data-origem="portfolio">
+            <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            Quero uma make assim
+          </a>
+          <a class="link-discreto" href="#" data-instagram data-origem="portfolio">Ver mais no Instagram <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ IDENTIFICAÇÃO ============ -->
+    <section class="secao secao--alt identificacao" aria-labelledby="identificacao-titulo">
+      <svg class="ramo ramo--sup-esq" aria-hidden="true"><use href="#i-ramo"/></svg>
+      <div class="container container--estreito">
+        <header class="secao__cabecalho revelar">
+          <p class="eyebrow">Eu te entendo</p>
+          <h2 class="titulo" id="identificacao-titulo">Você merece se olhar no espelho e <em class="metal">amar o que vê.</em></h2>
+        </header>
+        <div class="card-lista revelar">
+          <p class="card-lista__intro">Talvez você já tenha passado por isso:</p>
+          <ul class="lista-estrela" data-escalonar>
+            <li class="revelar"><svg aria-hidden="true"><use href="#i-estrela"/></svg>Medo de ficar com o rosto pesado ou artificial</li>
+            <li class="revelar"><svg aria-hidden="true"><use href="#i-estrela"/></svg>Maquiagem que começa a derreter antes da festa acabar</li>
+            <li class="revelar"><svg aria-hidden="true"><use href="#i-estrela"/></svg>Não se reconhecer nas fotos</li>
+            <li class="revelar"><svg aria-hidden="true"><use href="#i-estrela"/></svg>Correria e atraso no dia mais importante</li>
+          </ul>
+        </div>
+        <p class="frase-destaque revelar">Meu trabalho existe para você não precisar se preocupar com nada disso. Você só precisa aproveitar o seu momento.</p>
+      </div>
+    </section>
+
+    <!-- ============ SOBRE ============ -->
+    <section class="secao sobre" id="sobre" aria-labelledby="sobre-titulo">
+      <div class="container sobre__grade">
+        <div class="sobre__foto revelar">
+          <svg class="ramo sobre__ramo sobre__ramo--1" aria-hidden="true"><use href="#i-ramo"/></svg>
+          <svg class="ramo sobre__ramo sobre__ramo--2" aria-hidden="true"><use href="#i-ramo"/></svg>
+          <figure class="arco">
+            <div class="arco__foto foto">
+              <span class="foto__ph" aria-hidden="true">
+                <svg><use href="#i-estrela"/></svg>
+                <span>Foto da Júlia 2</span>
+              </span>
+              <picture>
+                <source type="image/webp" srcset="assets/img/julia-2-800.webp 800w, assets/img/julia-2-1600.webp 1600w" sizes="(min-width: 960px) 420px, 320px">
+                <img src="assets/img/julia-2.jpg" width="800" height="1000" alt="Júlia Cardoso em seu espaço de trabalho" loading="lazy" decoding="async" onerror="jsFotoErro(this)">
+              </picture>
+            </div>
+          </figure>
+        </div>
+
+        <div class="sobre__texto">
+          <p class="eyebrow revelar">Prazer, Júlia</p>
+          <h2 class="titulo revelar" id="sobre-titulo">Por trás de cada make, <em class="metal">um olhar cuidadoso.</em></h2>
+          <div class="revelar">
+            <!-- [CONFIRMAR COM A JÚLIA] Texto provisório. Não citar anos de experiência nem números. -->
+            <p class="nota-pendente">[CONFIRMAR COM A JÚLIA]</p>
+            <p>Sou a Júlia Cardoso, maquiadora em <span data-cidade>[CIDADE]</span>. A maquiagem entrou na minha vida [HISTÓRIA DA JÚLIA] e hoje é o que me move: ver uma cliente se olhar no espelho e sorrir.</p>
+            <p>Estou construindo meu trabalho com calma e cuidado, e por isso cada atendimento recebe minha atenção total, do primeiro contato ao último retoque.</p>
+          </div>
+          <p class="assinatura revelar"><span class="metal">Júlia Cardoso</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DIFERENCIAIS ============ -->
+    <section class="secao secao--alt diferenciais" aria-labelledby="diferenciais-titulo">
+      <svg class="ramo ramo--inf-dir" aria-hidden="true"><use href="#i-ramo"/></svg>
+      <div class="container">
+        <header class="secao__cabecalho revelar">
+          <p class="eyebrow">Por que comigo</p>
+          <h2 class="titulo" id="diferenciais-titulo">O que você encontra <em class="metal">no meu atendimento</em></h2>
+          <div class="divisor" aria-hidden="true"><span></span><svg><use href="#i-estrela"/></svg><span></span></div>
+        </header>
+        <ul class="diferenciais__grade" data-escalonar>
+          <li class="dif-card revelar">
+            <svg class="dif-card__icone" aria-hidden="true"><use href="#i-conversa"/></svg>
+            <div>
+              <h3 class="dif-card__titulo">Conversa antes da make</h3>
+              <p>Entendo sua ocasião, seu estilo e suas referências.</p>
+            </div>
+          </li>
+          <li class="dif-card revelar">
+            <svg class="dif-card__icone" aria-hidden="true"><use href="#i-pele"/></svg>
+            <div>
+              <h3 class="dif-card__titulo">Pele linda e natural</h3>
+              <p>Acabamento que valoriza sem pesar.</p>
+            </div>
+          </li>
+          <li class="dif-card revelar">
+            <svg class="dif-card__icone" aria-hidden="true"><use href="#i-ampulheta"/></svg>
+            <div>
+              <h3 class="dif-card__titulo">Feita para durar</h3>
+              <p>Técnicas para a make acompanhar o evento inteiro. [CONFIRMAR]</p>
+            </div>
+          </li>
+          <li class="dif-card revelar">
+            <svg class="dif-card__icone" aria-hidden="true"><use href="#i-pincel"/></svg>
+            <div>
+              <h3 class="dif-card__titulo">Higiene em primeiro lugar</h3>
+              <p>Pincéis e materiais sempre higienizados. [CONFIRMAR]</p>
+            </div>
+          </li>
+          <li class="dif-card revelar">
+            <svg class="dif-card__icone" aria-hidden="true"><use href="#i-relogio"/></svg>
+            <div>
+              <h3 class="dif-card__titulo">Pontualidade</h3>
+              <p>Seu horário é respeitado.</p>
+            </div>
+          </li>
+          <li class="dif-card revelar">
+            <svg class="dif-card__icone" aria-hidden="true"><use href="#i-camera"/></svg>
+            <div>
+              <h3 class="dif-card__titulo">Linda nas fotos</h3>
+              <p>Make pensada para brilhar também na câmera.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ SERVIÇOS ============ -->
+    <section class="secao servicos" id="servicos" aria-labelledby="servicos-titulo">
+      <div class="container">
+        <header class="secao__cabecalho revelar">
+          <p class="eyebrow">Serviços</p>
+          <h2 class="titulo" id="servicos-titulo">Qual é o seu <em class="metal">momento especial?</em></h2>
+          <div class="divisor" aria-hidden="true"><span></span><svg><use href="#i-estrela"/></svg><span></span></div>
+        </header>
+
+        <ul class="servicos__trilho revelar" id="servicos-trilho">
+          <li class="servico">
+            <svg class="servico__estrela" aria-hidden="true"><use href="#i-estrela"/></svg>
+            <h3 class="servico__titulo">Maquiagem Social e Festas</h3>
+            <p class="servico__texto">Para aniversários, casamentos como convidada, jantares e eventos. Uma make elegante que combina com você e com o seu look.</p>
+            <p class="servico__preco" data-preco="festa">Valor sob consulta</p>
+            <a class="btn btn--secundario btn--bloco" href="#agendar" data-wa="servico" data-servico="Festa" data-origem="servico-festa">
+              <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              Consultar disponibilidade
+            </a>
+          </li>
+          <li class="servico servico--destaque">
+            <svg class="servico__estrela" aria-hidden="true"><use href="#i-estrela"/></svg>
+            <h3 class="servico__titulo">Noivas</h3>
+            <p class="servico__texto">Para o dia do seu sim. Uma make pensada com calma, que acompanha a emoção, os abraços e as fotos.</p>
+            <p class="servico__preco" data-preco="noiva">Valor sob consulta</p>
+            <a class="btn btn--secundario btn--bloco" href="#agendar" data-wa="servico" data-servico="Noiva" data-origem="servico-noiva">
+              <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              Consultar disponibilidade
+            </a>
+          </li>
+          <li class="servico">
+            <svg class="servico__estrela" aria-hidden="true"><use href="#i-estrela"/></svg>
+            <h3 class="servico__titulo">Madrinhas e Formandas</h3>
+            <p class="servico__texto">Para brilhar ao lado de quem você ama ou celebrar a sua conquista, com uma make à altura do momento.</p>
+            <p class="servico__preco" data-preco="madrinhaFormanda">Valor sob consulta</p>
+            <a class="btn btn--secundario btn--bloco" href="#agendar" data-wa="servico" data-servico="Madrinha ou Formatura" data-origem="servico-madrinha-formanda">
+              <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              Consultar disponibilidade
+            </a>
+          </li>
+          <li class="servico">
+            <svg class="servico__estrela" aria-hidden="true"><use href="#i-estrela"/></svg>
+            <h3 class="servico__titulo">15 Anos</h3>
+            <p class="servico__texto">Uma make delicada e especial para a debutante, que respeita a idade e o estilo dela.</p>
+            <p class="servico__preco" data-preco="quinzeAnos">Valor sob consulta</p>
+            <a class="btn btn--secundario btn--bloco" href="#agendar" data-wa="servico" data-servico="15 Anos" data-origem="servico-15-anos">
+              <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              Consultar disponibilidade
+            </a>
+          </li>
+          <li class="servico">
+            <svg class="servico__estrela" aria-hidden="true"><use href="#i-estrela"/></svg>
+            <h3 class="servico__titulo">Ensaios Fotográficos</h3>
+            <p class="servico__texto">Make pensada para a luz e para a câmera, para você se reconhecer (e se amar) em cada foto.</p>
+            <p class="servico__preco" data-preco="ensaio">Valor sob consulta</p>
+            <a class="btn btn--secundario btn--bloco" href="#agendar" data-wa="servico" data-servico="Ensaio Fotográfico" data-origem="servico-ensaio">
+              <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              Consultar disponibilidade
+            </a>
+          </li>
+        </ul>
+        <div class="servicos__pontos" id="servicos-pontos" role="group" aria-label="Escolher serviço"></div>
+
+        <p class="servicos__nota revelar">
+          <svg aria-hidden="true"><use href="#i-estrela"/></svg>
+          <span>Atendimento no estúdio ou a domicílio [CONFIRMAR]</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ COMO FUNCIONA ============ -->
+    <section class="secao secao--alt como" id="como-funciona" aria-labelledby="como-titulo">
+      <div class="container">
+        <header class="secao__cabecalho revelar">
+          <p class="eyebrow">Como funciona</p>
+          <h2 class="titulo" id="como-titulo">Agendar é <em class="metal">simples assim</em></h2>
+        </header>
+        <ol class="passos" data-escalonar>
+          <li class="passo revelar">
+            <span class="passo__num" aria-hidden="true"><span class="metal">1</span></span>
+            <div>
+              <h3 class="passo__titulo">Você me chama no WhatsApp</h3>
+              <p>É só tocar no botão. A mensagem já vai pronta.</p>
+            </div>
+          </li>
+          <li class="passo revelar">
+            <span class="passo__num" aria-hidden="true"><span class="metal">2</span></span>
+            <div>
+              <h3 class="passo__titulo">Me conta a ocasião, a data e suas referências</h3>
+              <p>Pode mandar fotos de makes que você ama.</p>
+            </div>
+          </li>
+          <li class="passo revelar">
+            <span class="passo__num" aria-hidden="true"><span class="metal">3</span></span>
+            <div>
+              <h3 class="passo__titulo">Reservamos o seu horário</h3>
+              <p>Tudo combinado e confirmado por mensagem.</p>
+            </div>
+          </li>
+          <li class="passo revelar">
+            <span class="passo__num" aria-hidden="true"><span class="metal">4</span></span>
+            <div>
+              <h3 class="passo__titulo">No dia, você só relaxa e <span class="passo__fim">brilha <svg class="passo__brilho" aria-hidden="true"><use href="#i-estrela"/></svg></span></h3>
+              <p>Eu cuido de cada detalhe.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ FORMULÁRIO "MONTE SEU PEDIDO" ============ -->
+    <section class="secao pedido" id="agendar" aria-labelledby="pedido-titulo" data-sem-barra>
+      <div class="pedido__luz" aria-hidden="true"></div>
+      <div class="container container--medio">
+        <header class="secao__cabecalho revelar">
+          <p class="eyebrow">Monte seu pedido</p>
+          <h2 class="titulo" id="pedido-titulo">Me conta sobre <em class="metal">o seu momento</em></h2>
+          <p class="secao__texto">Preencha em menos de um minuto. Eu recebo tudo organizadinho no WhatsApp.</p>
+        </header>
+
+        <form class="form revelar" id="form-pedido" novalidate>
+          <div class="form__grade">
+            <div class="campo">
+              <label for="f-nome">Seu nome <span class="campo__obrig" aria-hidden="true">*</span></label>
+              <input id="f-nome" name="nome" type="text" autocomplete="given-name" required aria-describedby="f-nome-erro" placeholder="Como posso te chamar?">
+              <p class="campo__erro" id="f-nome-erro"></p>
+            </div>
+
+            <div class="campo">
+              <label for="f-ocasiao">Ocasião <span class="campo__obrig" aria-hidden="true">*</span></label>
+              <select id="f-ocasiao" name="ocasiao" required aria-describedby="f-ocasiao-erro">
+                <option value="">Selecione</option>
+                <option>Festa</option>
+                <option>Noiva</option>
+                <option>Madrinha</option>
+                <option>Formatura</option>
+                <option>15 anos</option>
+                <option>Ensaio</option>
+                <option>Outro</option>
+              </select>
+              <p class="campo__erro" id="f-ocasiao-erro"></p>
+            </div>
+
+            <div class="campo">
+              <label for="f-data">Data do evento <span class="campo__obrig" aria-hidden="true">*</span></label>
+              <input id="f-data" name="data" type="date" required aria-describedby="f-data-erro">
+              <p class="campo__erro" id="f-data-erro"></p>
+            </div>
+
+            <div class="campo">
+              <label for="f-horario">Horário aproximado</label>
+              <input id="f-horario" name="horario" type="time" step="900">
+            </div>
+
+            <fieldset class="campo campo--largo">
+              <legend>Local</legend>
+              <div class="opcoes">
+                <label class="opcao">
+                  <input type="radio" name="local" value="No estúdio">
+                  <span class="opcao__caixa"><span>No estúdio</span></span>
+                </label>
+                <label class="opcao">
+                  <input type="radio" name="local" value="A domicílio">
+                  <span class="opcao__caixa"><span>A domicílio [CONFIRMAR]</span></span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="campo campo--largo">
+              <label for="f-obs">Observações <span class="campo__opcional">(opcional)</span></label>
+              <textarea id="f-obs" name="obs" rows="3" placeholder="Referências, tipo de pele, quantas pessoas..."></textarea>
+            </div>
+          </div>
+
+          <p class="form__legenda"><span aria-hidden="true">*</span> Campos obrigatórios</p>
+
+          <button class="btn btn--primario btn--lg btn--bloco" type="submit">
+            <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            Enviar pelo WhatsApp
+          </button>
+          <p class="form__micro">Você será direcionada ao WhatsApp com a mensagem pronta. É só enviar.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ DEPOIMENTOS (oculta) ============
+         Aparece somente com CONFIG.mostrarDepoimentos = true no js/main.js.
+         Preencher SOMENTE com depoimentos reais de clientes. -->
+    <section class="secao depoimentos" id="depoimentos" aria-labelledby="depoimentos-titulo" hidden>
+      <div class="container">
+        <header class="secao__cabecalho revelar">
+          <p class="eyebrow">Depoimentos</p>
+          <h2 class="titulo" id="depoimentos-titulo">O que dizem <em class="metal">minhas clientes</em></h2>
+        </header>
+        <ul class="depoimentos__grade" id="depoimentos-lista" data-escalonar></ul>
+      </div>
+    </section>
+
+    <!-- ============ DÚVIDAS ============ -->
+    <section class="secao secao--alt faq" id="duvidas" aria-labelledby="faq-titulo">
+      <svg class="ramo ramo--sup-dir" aria-hidden="true"><use href="#i-ramo"/></svg>
+      <div class="container container--estreito">
+        <header class="secao__cabecalho revelar">
+          <p class="eyebrow">Dúvidas</p>
+          <h2 class="titulo" id="faq-titulo">Perguntas <em class="metal">frequentes</em></h2>
+          <div class="divisor" aria-hidden="true"><span></span><svg><use href="#i-estrela"/></svg><span></span></div>
+        </header>
+
+        <div class="faq__lista revelar" id="faq-lista">
+          <div class="faq__item">
+            <h3><button class="faq__botao" type="button" id="faq-b1" aria-expanded="false" aria-controls="faq-p1">Quanto tempo leva a maquiagem?<svg aria-hidden="true"><use href="#i-estrela"/></svg></button></h3>
+            <div class="faq__painel" id="faq-p1" role="region" aria-labelledby="faq-b1"><div class="faq__conteudo">
+              <p>Em média, [TEMPO] para make social e [TEMPO] para noivas, já contando o preparo de pele. [CONFIRMAR]</p>
+            </div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__botao" type="button" id="faq-b2" aria-expanded="false" aria-controls="faq-p2">Você atende a domicílio?<svg aria-hidden="true"><use href="#i-estrela"/></svg></button></h3>
+            <div class="faq__painel" id="faq-p2" role="region" aria-labelledby="faq-b2"><div class="faq__conteudo">
+              <p>Sim, atendo a domicílio em [REGIÕES ATENDIDAS], com taxa de deslocamento combinada no agendamento. [CONFIRMAR]</p>
+            </div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__botao" type="button" id="faq-b3" aria-expanded="false" aria-controls="faq-p3">Com quanto tempo de antecedência devo agendar?<svg aria-hidden="true"><use href="#i-estrela"/></svg></button></h3>
+            <div class="faq__painel" id="faq-p3" role="region" aria-labelledby="faq-b3"><div class="faq__conteudo">
+              <p>Quanto antes, melhor, principalmente para sábados e datas festivas. Como atendo uma cliente por vez, cada horário é único.</p>
+            </div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__botao" type="button" id="faq-b4" aria-expanded="false" aria-controls="faq-p4">Os cílios estão inclusos?<svg aria-hidden="true"><use href="#i-estrela"/></svg></button></h3>
+            <div class="faq__painel" id="faq-p4" role="region" aria-labelledby="faq-b4"><div class="faq__conteudo">
+              <p>[Os cílios postiços estão inclusos / são opcionais, com valor à parte]. [CONFIRMAR]</p>
+            </div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__botao" type="button" id="faq-b5" aria-expanded="false" aria-controls="faq-p5">A maquiagem dura a festa toda?<svg aria-hidden="true"><use href="#i-estrela"/></svg></button></h3>
+            <div class="faq__painel" id="faq-p5" role="region" aria-labelledby="faq-b5"><div class="faq__conteudo">
+              <p>A make é feita com preparo de pele e técnicas de fixação para acompanhar o seu evento, do começo ao fim. [CONFIRMAR]</p>
+            </div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__botao" type="button" id="faq-b6" aria-expanded="false" aria-controls="faq-p6">Como faço para reservar minha data?<svg aria-hidden="true"><use href="#i-estrela"/></svg></button></h3>
+            <div class="faq__painel" id="faq-p6" role="region" aria-labelledby="faq-b6"><div class="faq__conteudo">
+              <p>É só me chamar no WhatsApp (ou preencher o formulário acima) com a ocasião e a data. Confirmada a disponibilidade, a reserva é feita mediante [SINAL/CONDIÇÃO DE RESERVA]. [CONFIRMAR]</p>
+            </div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__botao" type="button" id="faq-b7" aria-expanded="false" aria-controls="faq-p7">Quais são as formas de pagamento?<svg aria-hidden="true"><use href="#i-estrela"/></svg></button></h3>
+            <div class="faq__painel" id="faq-p7" role="region" aria-labelledby="faq-b7"><div class="faq__conteudo">
+              <p>[FORMAS DE PAGAMENTO: Pix, cartão, dinheiro...] [CONFIRMAR]</p>
+            </div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__botao" type="button" id="faq-b8" aria-expanded="false" aria-controls="faq-p8">Tenho pele oleosa ou sensível. Você consegue atender?<svg aria-hidden="true"><use href="#i-estrela"/></svg></button></h3>
+            <div class="faq__painel" id="faq-p8" role="region" aria-labelledby="faq-b8"><div class="faq__conteudo">
+              <p>Sim! O preparo de pele é adaptado para você. Me conte sobre a sua pele (e alergias, se tiver) quando for agendar.</p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA FINAL ============ -->
+    <section class="secao cta-final" id="reservar" aria-labelledby="cta-titulo" data-sem-barra>
+      <div class="cta-final__luz" aria-hidden="true"></div>
+      <div class="glints glints--cta" aria-hidden="true">
+        <svg class="glint" style="--x:14%;--y:22%;--t:14px"><use href="#i-estrela"/></svg>
+        <svg class="glint" style="--x:84%;--y:18%;--t:18px"><use href="#i-estrela"/></svg>
+        <svg class="glint" style="--x:8%;--y:74%;--t:10px"><use href="#i-estrela"/></svg>
+        <svg class="glint" style="--x:90%;--y:70%;--t:12px"><use href="#i-estrela"/></svg>
+        <svg class="glint" style="--x:66%;--y:8%;--t:9px"><use href="#i-estrela"/></svg>
+      </div>
+      <div class="container container--estreito cta-final__conteudo">
+        <img class="cta-final__logo revelar" src="assets/img/logo.png" width="120" height="120" alt="Logo Julia Studio Makeup" loading="lazy" decoding="async" onerror="jsLogoErro(this)">
+        <h2 class="titulo revelar" id="cta-titulo">Sua próxima ocasião especial <em class="metal">merece esse cuidado.</em></h2>
+        <p class="secao__texto revelar">Como atendo uma cliente por vez, os horários são limitados. Garanta o seu.</p>
+        <div class="revelar">
+          <a class="btn btn--primario btn--xl" href="#agendar" data-wa="reservar" data-origem="cta-final">
+            <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            Quero reservar minha data
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ RODAPÉ ============ -->
+  <footer class="rodape" data-sem-barra>
+    <div class="container rodape__inner">
+      <div class="divisor" aria-hidden="true"><span></span><svg><use href="#i-estrela"/></svg><span></span></div>
+      <img class="rodape__logo" src="assets/img/logo.png" width="64" height="64" alt="" loading="lazy" decoding="async" onerror="jsLogoErro(this)">
+      <p class="rodape__marca">Julia Studio Makeup</p>
+      <p class="rodape__cidade">Maquiagem profissional <span aria-hidden="true">·</span> <span data-cidade>[CIDADE]</span></p>
+      <ul class="rodape__redes">
+        <li>
+          <a class="icone-redonda" href="#agendar" data-wa="padrao" data-origem="rodape" aria-label="Conversar com a Júlia no WhatsApp">
+            <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="icone-redonda" href="#" data-instagram data-origem="rodape" aria-label="Instagram da Julia Studio Makeup">
+            <svg aria-hidden="true"><use href="#i-instagram"/></svg>
+          </a>
+        </li>
+      </ul>
+      <p class="rodape__copy">© <span data-ano>2026</span> Julia Studio Makeup</p>
+    </div>
+  </footer>
+
+  <!-- ============ CONVERSÃO FIXA ============ -->
+  <!-- Mobile: barra inferior -->
+  <div class="barra-cta" id="barra-cta">
+    <a class="btn btn--primario btn--bloco" href="#agendar" data-wa="padrao" data-origem="barra-mobile">
+      <svg class="btn__icone" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+      Agendar pelo WhatsApp
+    </a>
+  </div>
+  <!-- Desktop: botão flutuante -->
+  <a class="flutuante" id="flutuante" href="#agendar" data-wa="padrao" data-origem="flutuante" aria-label="Agendar pelo WhatsApp">
+    <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>
+  </a>
+
+  <!-- ============ LIGHTBOX DO PORTFÓLIO ============ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Portfólio ampliado" hidden>
+    <button class="lightbox__fechar" type="button" aria-label="Fechar">
+      <svg aria-hidden="true"><use href="#i-fechar"/></svg>
+    </button>
+    <figure class="lightbox__figura">
+      <div class="lightbox__foto foto" id="lightbox-foto"></div>
+      <figcaption class="lightbox__legenda" id="lightbox-legenda"></figcaption>
+    </figure>
+    <div class="lightbox__controles">
+      <button class="lightbox__seta" type="button" data-dir="-1" aria-label="Foto anterior">
+        <svg aria-hidden="true"><use href="#i-seta-esq"/></svg>
+      </button>
+      <p class="lightbox__contador" id="lightbox-contador" aria-live="polite">1 / 6</p>
+      <button class="lightbox__seta" type="button" data-dir="1" aria-label="Próxima foto">
+        <svg aria-hidden="true"><use href="#i-seta-dir"/></svg>
+      </button>
+    </div>
+  </div>
+</body>
+</html>
