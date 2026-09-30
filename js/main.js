@@ -4,7 +4,7 @@
    ========================================================================== */
 const CONFIG = {
   // Somente números: 55 + DDD + número. Ex.: "5511987654321"
-  whatsapp: "55[DDD][NUMERO]",
+  whatsapp: "5551991962607",
   instagram: "https://instagram.com/[USUARIO]",
   cidade: "[CIDADE/REGIÃO]",
 

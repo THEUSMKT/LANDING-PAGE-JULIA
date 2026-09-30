@@ -112,7 +112,7 @@ A página destaca tudo que ainda está `[ENTRE COLCHETES]` (sublinhado tracejado
 O destaque some quando o texto é preenchido.
 
 **No `js/main.js` (CONFIG)**
-- [ ] `whatsapp`: número com DDD
+- [x] `whatsapp`: (51) 99196-2607
 - [ ] `instagram`: usuário
 - [ ] `cidade`: cidade/região
 - [ ] `metaPixelId` (quando for rodar anúncios)
@@ -124,7 +124,7 @@ O destaque some quando o texto é preenchido.
 - [ ] `[CIDADE]` no `<title>`, na meta description, no og:title e no twitter:title
 - [ ] Se trocar o endereço do site (repositório renomeado ou domínio próprio): canonical, og:url,
       og:image, twitter:image e JSON-LD
-- [ ] JSON-LD: `telephone`, `areaServed`, `addressLocality`, `[UF]`, `sameAs` (Instagram)
+- [ ] JSON-LD: `areaServed`, `addressLocality`, `[UF]`, `sameAs` (Instagram). O `telephone` já está preenchido
 
 **Textos para confirmar com a Júlia (`index.html`)**
 - [ ] Sobre: `[HISTÓRIA DA JÚLIA]` e o texto todo (`[CONFIRMAR COM A JÚLIA]`)
