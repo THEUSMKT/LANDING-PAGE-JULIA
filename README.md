@@ -1,7 +1,8 @@
 # Julia Studio Makeup — landing page
 
 Landing page da **Júlia Cardoso**, maquiadora. É um site estático em HTML, CSS e JavaScript puro, sem build.
-Abre direto no navegador e pode ser publicado na Netlify do jeito que está.
+Abre direto no navegador e é publicado no **GitHub Pages**:
+**https://theusmkt.github.io/LANDING-PAGE-JULIA/**
 
 ```
 index.html              página (textos, SEO, dados estruturados)
@@ -9,8 +10,8 @@ css/style.css           visual (cores e fontes no topo, em :root)
 js/main.js              CONFIG (WhatsApp, Instagram, cidade, portfólio...) + interações
 assets/img/             logo, fotos da Júlia, og-image, favicon
 assets/img/portfolio/   fotos dos trabalhos (make-01.jpg ... make-06.jpg)
-scripts/                ferramentas locais de imagem (não vão para o ar)
-netlify.toml            configuração da Netlify (sem build, cache das imagens)
+scripts/                ferramentas de imagem (rodam sozinhas na publicação; não vão para o ar)
+.github/workflows/      publicação automática no GitHub Pages
 ```
 
 ## Editar o básico: o `CONFIG`
@@ -32,44 +33,58 @@ As mensagens prontas do WhatsApp ficam em `CONFIG.mensagens`.
 > O `<head>` do `index.html` (título, descrição, Open Graph e JSON-LD) precisa ser editado à mão.
 > O WhatsApp, o Instagram e o Google leem essa parte sem rodar JavaScript.
 
+## Publicar no GitHub Pages (uma vez só)
+
+1. No GitHub, abra o repositório e vá em **Settings → Pages**.
+2. Em **Build and deployment → Source**, escolha **GitHub Actions**. Não precisa salvar mais nada.
+3. Vá na aba **Actions**, clique em **Publicar site → Run workflow** e aguarde o círculo ficar verde
+   (cerca de 1 minuto). O endereço aparece no próprio resultado e em **Settings → Pages**.
+
+Daí em diante, **toda alteração na branch `main` é publicada sozinha** em cerca de 1 minuto.
+Se algo der errado, a execução aparece com um X vermelho na aba **Actions** e o site continua com a
+versão anterior no ar.
+
+> Para um endereço mais curto, dá para renomear o repositório (ex.: `julia-studio-makeup` gera
+> `theusmkt.github.io/julia-studio-makeup/`) ou ligar um domínio próprio em **Settings → Pages → Custom domain**.
+> Nos dois casos, troque o endereço no `<head>` do `index.html` (canonical, og:url, og:image,
+> twitter:image e JSON-LD).
+
 ## Adicionar as fotos
 
-1. **Coloque os arquivos** com estes nomes exatos:
+1. **Suba os arquivos pelo site do GitHub**: abra a pasta certa no repositório, clique em
+   **Add file → Upload files**, arraste as fotos e clique em **Commit changes**. Use estes nomes exatos:
    - `assets/img/logo.png` (logo circular, fundo transparente)
    - `assets/img/julia-1.jpg` (foto do topo) e `assets/img/julia-2.jpg` (seção "Sobre")
    - `assets/img/portfolio/make-01.jpg` até `make-06.jpg`
 
    Use fotos verticais (4:5), com 1600px de largura ou mais. Nada de banco de imagens no portfólio.
-2. **Rode os scripts** (precisa ter o [Node.js](https://nodejs.org) instalado):
-   ```bash
-   cd scripts
-   npm install        # só na primeira vez
-   npm run otimizar   # gera as versões WebP 800px e 1600px das fotos
-   npm run logo       # otimiza o logo e gera og-image.jpg, favicon.png e apple-touch-icon.png
-   ```
-   Depois, abra o `assets/img/favicon.png`. Se o monograma "JS" estiver mal enquadrado, ajuste
-   `RECORTE_MONOGRAMA` no topo do `scripts/preparar-logo.mjs` e rode `npm run logo` de novo.
+2. **Espere a publicação automática** (aba **Actions**). Ela gera as versões WebP de 800px e 1600px
+   das fotos e, a partir do `logo.png`, o logo otimizado, a `og-image.jpg`, o `favicon.png` e o
+   `apple-touch-icon.png`. Depois, confira o favicon na aba do navegador. Se o monograma "JS" estiver
+   mal enquadrado, ajuste `RECORTE_MONOGRAMA` no topo do `scripts/preparar-logo.mjs` (dá para editar
+   pelo próprio GitHub, no ícone de lápis).
 3. **Revise os textos alternativos**: em `CONFIG.portfolio` (no `js/main.js`), troque cada
    `[DESCREVER A FOTO]` por uma descrição curta da make (ex.: "olho esfumado marrom e pele iluminada").
 
-Para ter mais fotos no portfólio, salve como `make-07.jpg`, inclua uma linha em `CONFIG.portfolio`
-e rode `npm run otimizar`.
+Para ter mais fotos no portfólio, suba `make-07.jpg` e inclua uma linha em `CONFIG.portfolio`.
 
 Enquanto uma foto não existir, a página mostra um placeholder elegante no lugar dela. Se o WebP ainda
-não foi gerado, o navegador usa o JPG.
+não foi gerado (por exemplo, abrindo o `index.html` direto no computador), o navegador usa o JPG.
 
-## Publicar na Netlify
+<details>
+<summary>Rodar os scripts de imagem no computador (opcional)</summary>
 
-1. Em [app.netlify.com](https://app.netlify.com), clique em **Add new site → Import an existing project**,
-   escolha **GitHub** e selecione este repositório.
-2. Deixe **Build command** vazio e **Publish directory** como `.` (o `netlify.toml` já faz isso).
-   Clique em **Deploy**.
-3. Em **Domain management**, troque o nome do site (ex.: `juliastudiomakeup.netlify.app`) ou ligue um
-   domínio próprio. Depois atualize os `[SEU-DOMINIO]` do `<head>` do `index.html`.
+Precisa do [Node.js](https://nodejs.org):
 
-Daqui em diante, cada alteração enviada para o GitHub é publicada sozinha.
-(Alternativa sem GitHub: arraste a pasta do projeto em [app.netlify.com/drop](https://app.netlify.com/drop).
-Antes, apague `scripts/node_modules`.)
+```bash
+cd scripts
+npm install        # só na primeira vez
+npm run otimizar   # versões WebP 800px e 1600px das fotos
+npm run logo       # logo otimizado, og-image.jpg, favicon.png e apple-touch-icon.png
+```
+
+Os WebP não entram no Git (estão no `.gitignore`), porque a publicação gera de novo.
+</details>
 
 ## Rastreamento
 
@@ -104,7 +119,8 @@ O destaque some quando o texto é preenchido.
 
 **No `<head>` do `index.html`**
 - [ ] `[CIDADE]` no `<title>`, na meta description, no og:title e no twitter:title
-- [ ] `[SEU-DOMINIO]` em og:url, og:image, twitter:image e no JSON-LD (e descomentar o canonical)
+- [ ] Se trocar o endereço do site (repositório renomeado ou domínio próprio): canonical, og:url,
+      og:image, twitter:image e JSON-LD
 - [ ] JSON-LD: `telephone`, `areaServed`, `addressLocality`, `[UF]`, `sameAs` (Instagram)
 
 **Textos para confirmar com a Júlia (`index.html`)**
@@ -122,5 +138,6 @@ O destaque some quando o texto é preenchido.
 
 **Imagens**
 - [ ] `logo.png`, `julia-1.jpg`, `julia-2.jpg`, `make-01.jpg` a `make-06.jpg`
-- [ ] Rodar `npm run otimizar` e `npm run logo`. O `og-image.jpg` e o `favicon.png` atuais são provisórios,
-      feitos com um monograma "JS". O `logo-provisorio.png` só aparece enquanto o `logo.png` não existir.
+- [ ] Conferir o favicon depois da primeira publicação com o logo real. O `og-image.jpg` e o `favicon.png`
+      atuais são provisórios, feitos com um monograma "JS", e são refeitos sozinhos quando o `logo.png`
+      entra. O `logo-provisorio.png` só aparece enquanto o `logo.png` não existir.

@@ -1,0 +1,55 @@
+# Publica o site no GitHub Pages a cada alteração na branch main.
+# Antes de publicar, gera as versões WebP das fotos e, se o logo.png existir,
+# o logo otimizado, a og-image e o favicon. Ninguém precisa rodar nada no computador.
+#
+# Requisito (uma vez só): Settings → Pages → Build and deployment → Source: "GitHub Actions".
+
+name: Publicar site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # botão "Run workflow" na aba Actions
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Otimizar fotos e logo
+        working-directory: scripts
+        run: |
+          npm ci --no-audit --no-fund
+          npm run otimizar
+          if [ -f ../assets/img/logo.png ]; then npm run logo; fi
+
+      - name: Deixar só os arquivos do site
+        run: rm -rf scripts README.md assets/img/portfolio/LEIA-ME.txt
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

@@ -3,7 +3,8 @@
 //   - og-image.jpg (1200x630): logo sobre o fundo escuro da marca, com glow rose
 //   - favicon.png (192px) e apple-touch-icon.png (180px): recorte do monograma "JS"
 //
-// Uso (dentro da pasta scripts):  npm run logo
+// Roda sozinho na publicação quando o logo.png existe (.github/workflows/publicar-site.yml).
+// Para rodar no computador (dentro da pasta scripts): npm run logo
 //
 // O favicon usa o recorte definido em RECORTE_MONOGRAMA (frações do tamanho do logo).
 // Depois de rodar, abra assets/img/favicon.png: se o "JS" não estiver bem enquadrado,

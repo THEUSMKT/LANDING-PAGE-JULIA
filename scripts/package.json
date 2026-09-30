@@ -2,7 +2,7 @@
   "name": "julia-studio-makeup-scripts",
   "private": true,
   "type": "module",
-  "description": "Ferramentas locais de imagem. Não fazem parte do site publicado.",
+  "description": "Ferramentas de imagem. Rodam no GitHub Actions ao publicar; não fazem parte do site.",
   "scripts": {
     "otimizar": "node otimizar-imagens.mjs",
     "logo": "node preparar-logo.mjs"

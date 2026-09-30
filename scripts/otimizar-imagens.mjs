@@ -3,7 +3,8 @@
 //   make-01.jpg  ->  make-01-800.webp  e  make-01-1600.webp
 // O JPG original é mantido e continua sendo o fallback do <picture>.
 //
-// Uso (dentro da pasta scripts):  npm install  (só na primeira vez)  e depois  npm run otimizar
+// Roda sozinho na publicação (.github/workflows/publicar-site.yml).
+// Para rodar no computador (dentro da pasta scripts): npm install (só na primeira vez) e depois npm run otimizar
 // Para refazer tudo do zero:      npm run otimizar -- --forcar
 
 import sharp from "sharp";
