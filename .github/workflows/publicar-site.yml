@@ -43,7 +43,7 @@ jobs:
           if [ -f ../assets/img/logo.png ]; then npm run logo; fi
 
       - name: Deixar só os arquivos do site
-        run: rm -rf scripts README.md assets/img/portfolio/LEIA-ME.txt
+        run: rm -rf scripts README.md assets/img/portfolio/LEIA-ME.txt assets/img/logo-original.png
 
       - uses: actions/configure-pages@v5
 

@@ -1,7 +1,8 @@
 // Prepara tudo o que depende do logo, a partir de assets/img/logo.png:
-//   - logo.png otimizado (480px). O arquivo original é guardado como logo-original.png
+//   - logo.png otimizado (480px) e logo-pequeno.png (144px, usado no header).
+//     O arquivo original é guardado como logo-original.png
 //   - og-image.jpg (1200x630): logo sobre o fundo escuro da marca, com glow rose
-//   - favicon.png (192px) e apple-touch-icon.png (180px): recorte do monograma "JS"
+//   - favicon.png (192px) e apple-touch-icon.png (180px): recorte do monograma "JS" com o rosto e as folhas
 //
 // Roda sozinho na publicação quando o logo.png existe (.github/workflows/publicar-site.yml).
 // Para rodar no computador (dentro da pasta scripts): npm run logo
@@ -15,7 +16,7 @@ import { access, copyFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const RECORTE_MONOGRAMA = { x: 0.22, y: 0.12, largura: 0.56 }; // x/y = canto superior esquerdo
+const RECORTE_MONOGRAMA = { x: 0.2325, y: 0.1084, largura: 0.5205 }; // x/y = canto superior esquerdo (medido no logo atual)
 const FUNDO = "#140E0F";
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -48,6 +49,13 @@ const logoInfo = await sharp(ORIGINAL)
   .toFile(LOGO);
 console.log(`  ok  assets/img/logo.png (480x480, ${(logoInfo.size / 1024).toFixed(0)} KB)`);
 
+// Versão leve para o header (aparece com 42-46px; 144px cobre telas 3x)
+const pequenoInfo = await sharp(ORIGINAL)
+  .resize(144, 144, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+  .png({ compressionLevel: 9, palette: true, quality: 95 })
+  .toFile(path.join(IMG, "logo-pequeno.png"));
+console.log(`  ok  assets/img/logo-pequeno.png (144x144, ${(pequenoInfo.size / 1024).toFixed(0)} KB)`);
+
 // 2) og-image.jpg
 const glow = Buffer.from(`
   <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
@@ -77,17 +85,17 @@ const recorte = {
 };
 const monograma = await sharp(ORIGINAL).extract(recorte).toBuffer();
 
-async function icone(tamanho, arquivo, redondo) {
-  const miolo = Math.round(tamanho * 0.86);
-  const mono = await sharp(monograma).resize(miolo, miolo, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).toBuffer();
-  const forma = redondo
-    ? `<circle cx="${tamanho / 2}" cy="${tamanho / 2}" r="${tamanho / 2}" fill="${FUNDO}"/>`
-    : `<rect width="${tamanho}" height="${tamanho}" fill="${FUNDO}"/>`;
-  await sharp(Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${tamanho}" height="${tamanho}">${forma}</svg>`))
-    .composite([{ input: mono, gravity: "center" }])
-    .png({ compressionLevel: 9 })
-    .toFile(path.join(IMG, arquivo));
-  console.log(`  ok  assets/img/${arquivo} (${tamanho}x${tamanho})`);
+// O recorte do monograma ocupa o ícone inteiro (o fundo já é o chocolate do próprio logo).
+// Favicon com cantos arredondados; o apple-touch-icon fica quadrado (o iPhone arredonda sozinho).
+async function icone(tamanho, arquivo, arredondar) {
+  let img = await sharp(monograma).resize(tamanho, tamanho).toBuffer();
+  if (arredondar) {
+    const raio = Math.round(tamanho * 0.2);
+    const mascara = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${tamanho}" height="${tamanho}"><rect width="${tamanho}" height="${tamanho}" rx="${raio}" fill="#fff"/></svg>`);
+    img = await sharp(img).composite([{ input: mascara, blend: "dest-in" }]).toBuffer();
+  }
+  const info = await sharp(img).png({ compressionLevel: 9, palette: true, quality: 92 }).toFile(path.join(IMG, arquivo));
+  console.log(`  ok  assets/img/${arquivo} (${tamanho}x${tamanho}, ${(info.size / 1024).toFixed(0)} KB)`);
 }
 
 await icone(192, "favicon.png", true);

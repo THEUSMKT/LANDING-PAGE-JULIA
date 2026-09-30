@@ -53,16 +53,16 @@ versão anterior no ar.
 
 1. **Suba os arquivos pelo site do GitHub**: abra a pasta certa no repositório, clique em
    **Add file → Upload files**, arraste as fotos e clique em **Commit changes**. Use estes nomes exatos:
-   - `assets/img/logo.png` (logo circular, fundo transparente)
+   - `assets/img/logo.png` (já está no repositório; para trocar, suba outro PNG com fundo transparente)
    - `assets/img/julia-1.jpg` (foto do topo) e `assets/img/julia-2.jpg` (seção "Sobre")
    - `assets/img/portfolio/make-01.jpg` até `make-06.jpg`
 
    Use fotos verticais (4:5), com 1600px de largura ou mais. Nada de banco de imagens no portfólio.
 2. **Espere a publicação automática** (aba **Actions**). Ela gera as versões WebP de 800px e 1600px
-   das fotos e, a partir do `logo.png`, o logo otimizado, a `og-image.jpg`, o `favicon.png` e o
-   `apple-touch-icon.png`. Depois, confira o favicon na aba do navegador. Se o monograma "JS" estiver
-   mal enquadrado, ajuste `RECORTE_MONOGRAMA` no topo do `scripts/preparar-logo.mjs` (dá para editar
-   pelo próprio GitHub, no ícone de lápis).
+   das fotos e, a partir do `logo.png`, o logo otimizado, o `logo-pequeno.png` do header, a
+   `og-image.jpg`, o `favicon.png` e o `apple-touch-icon.png`. Se um dia trocar o logo, confira o
+   favicon: o recorte do monograma "JS" fica em `RECORTE_MONOGRAMA`, no topo do
+   `scripts/preparar-logo.mjs` (dá para editar pelo próprio GitHub, no ícone de lápis).
 3. **Revise os textos alternativos**: em `CONFIG.portfolio` (no `js/main.js`), troque cada
    `[DESCREVER A FOTO]` por uma descrição curta da make (ex.: "olho esfumado marrom e pele iluminada").
 
@@ -137,7 +137,5 @@ O destaque some quando o texto é preenchido.
 - [ ] Dúvidas: formas de pagamento
 
 **Imagens**
-- [ ] `logo.png`, `julia-1.jpg`, `julia-2.jpg`, `make-01.jpg` a `make-06.jpg`
-- [ ] Conferir o favicon depois da primeira publicação com o logo real. O `og-image.jpg` e o `favicon.png`
-      atuais são provisórios, feitos com um monograma "JS", e são refeitos sozinhos quando o `logo.png`
-      entra. O `logo-provisorio.png` só aparece enquanto o `logo.png` não existir.
+- [x] Logo (`logo.png`, recortado com fundo transparente), og-image, favicon e apple-touch-icon
+- [ ] `julia-1.jpg`, `julia-2.jpg`, `make-01.jpg` a `make-06.jpg`

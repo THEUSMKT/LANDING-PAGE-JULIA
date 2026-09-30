@@ -59,10 +59,14 @@
       if (foto) foto.classList.add('sem-foto');
     };
 
-    // Enquanto o logo.png não for colocado, usa o monograma provisório.
+    // Se a versão leve do logo (header) faltar, usa o logo.png; se ele também faltar, esconde.
     window.jsLogoErro = function (img) {
+      if (img.getAttribute('src').indexOf('logo-pequeno') !== -1) {
+        img.src = 'assets/img/logo.png';
+        return;
+      }
       img.onerror = null;
-      img.src = 'assets/img/logo-provisorio.png';
+      img.style.visibility = 'hidden';
     };
   </script>
 
@@ -132,7 +136,7 @@
   <header class="header" id="header">
     <div class="container header__inner">
       <a class="marca" href="#inicio" aria-label="Julia Studio Makeup, voltar ao início">
-        <img class="marca__logo" src="assets/img/logo.png" width="44" height="44" alt="" onerror="jsLogoErro(this)">
+        <img class="marca__logo" src="assets/img/logo-pequeno.png" width="44" height="44" alt="" onerror="jsLogoErro(this)">
         <span class="marca__nome" aria-hidden="true">Julia Studio</span>
       </a>
 
