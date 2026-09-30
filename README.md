@@ -1,6 +1,6 @@
 # Julia Studio Makeup — landing page
 
-Landing page da **Júlia Cardoso**, maquiadora. É um site estático em HTML, CSS e JavaScript puro, sem build.
+Landing page da **Julia Cardoso**, maquiadora. É um site estático em HTML, CSS e JavaScript puro, sem build.
 Abre direto no navegador e é publicado no **GitHub Pages**:
 **https://theusmkt.github.io/LANDING-PAGE-JULIA/**
 
@@ -8,7 +8,7 @@ Abre direto no navegador e é publicado no **GitHub Pages**:
 index.html              página (textos, SEO, dados estruturados)
 css/style.css           visual (cores e fontes no topo, em :root)
 js/main.js              CONFIG (WhatsApp, Instagram, cidade, portfólio...) + interações
-assets/img/             logo, fotos da Júlia, og-image, favicon
+assets/img/             logo, fotos da Julia, og-image, favicon
 assets/img/portfolio/   fotos dos trabalhos (make-01.jpg, make-02.jpg...)
 scripts/                ferramentas de imagem (rodam sozinhas na publicação; não vão para o ar)
 .github/workflows/      publicação automática no GitHub Pages
@@ -113,27 +113,25 @@ O destaque some quando o texto é preenchido.
 
 **No `js/main.js` (CONFIG)**
 - [x] `whatsapp`: (51) 99196-2607
-- [ ] `instagram`: usuário
-- [ ] `cidade`: cidade/região
+- [x] `instagram`: @juliastudio.art
+- [x] `cidade`: São Leopoldo
 - [ ] `metaPixelId` (quando for rodar anúncios)
 - [ ] `precos`: valores (só se `mostrarPrecos: true`)
 - [ ] `portfolio`: confirmar a ocasião de cada foto (hoje: make-01 Ensaio, make-02 Festa, make-03 Social)
 - [ ] `depoimentos`: somente depoimentos reais, e então `mostrarDepoimentos: true`
 
 **No `<head>` do `index.html`**
-- [ ] `[CIDADE]` no `<title>`, na meta description, no og:title e no twitter:title
+- [x] Cidade no `<title>`, na meta description, no og:title e no twitter:title
 - [ ] Se trocar o endereço do site (repositório renomeado ou domínio próprio): canonical, og:url,
       og:image, twitter:image e JSON-LD
-- [ ] JSON-LD: `areaServed`, `addressLocality`, `[UF]`, `sameAs` (Instagram). O `telephone` já está preenchido
+- [x] JSON-LD: telefone, São Leopoldo/RS e Instagram (sem endereço, de propósito)
 
-**Textos para confirmar com a Júlia (`index.html`)**
-- [ ] Sobre: `[HISTÓRIA DA JÚLIA]` e o texto todo (`[CONFIRMAR COM A JÚLIA]`)
+**Textos para confirmar com a Julia (`index.html`)**
+- [x] Sobre: texto com a motivação da Julia
 - [ ] Diferencial "Feita para durar": técnicas de fixação `[CONFIRMAR]`
 - [ ] Diferencial "Higiene em primeiro lugar": `[CONFIRMAR]`
-- [ ] Serviços: "Atendimento no estúdio ou a domicílio" `[CONFIRMAR]`
-- [ ] Formulário: opção "A domicílio" `[CONFIRMAR]` (se ela não atende a domicílio, remover a opção)
+- [x] Atendimento: com hora marcada em São Leopoldo ou no local do evento (nunca citar a casa dela)
 - [ ] Dúvidas: tempo da make (`[TEMPO]` social e noiva)
-- [ ] Dúvidas: regiões atendidas a domicílio e taxa de deslocamento
 - [ ] Dúvidas: cílios inclusos ou à parte
 - [ ] Dúvidas: duração da make (técnicas de fixação)
 - [ ] Dúvidas: como reservar (sinal/condição de reserva)
@@ -141,5 +139,5 @@ O destaque some quando o texto é preenchido.
 
 **Imagens**
 - [x] Logo (`logo.png`, recortado com fundo transparente), og-image, favicon e apple-touch-icon
-- [x] Fotos da Júlia (`julia-1.jpg`, `julia-2.jpg`) e 3 fotos de clientes no portfólio
+- [x] Fotos da Julia (`julia-1.jpg`, `julia-2.jpg`) e 3 fotos de clientes no portfólio
 - [ ] Mais fotos de clientes (opcional), de preferência o arquivo original, em pé e com boa resolução

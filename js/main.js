@@ -5,8 +5,8 @@
 const CONFIG = {
   // Somente números: 55 + DDD + número. Ex.: "5511987654321"
   whatsapp: "5551991962607",
-  instagram: "https://instagram.com/[USUARIO]",
-  cidade: "[CIDADE/REGIÃO]",
+  instagram: "https://www.instagram.com/juliastudio.art/",
+  cidade: "São Leopoldo",
 
   mostrarPrecos: false,      // true = troca "Valor sob consulta" por "a partir de R$ ..." (valores em "precos")
   mostrarDepoimentos: false, // true = mostra a seção de depoimentos (preencha "depoimentos" antes)
@@ -14,10 +14,10 @@ const CONFIG = {
 
   // Mensagens que já vão prontas para o WhatsApp
   mensagens: {
-    padrao: "Oi, Júlia! Vi seu site e quero saber sobre uma maquiagem ✨",
-    portfolio: "Oi, Júlia! Vi seu portfólio e quero uma make parecida ✨",
-    reservar: "Oi, Júlia! Vi seu site e quero reservar minha data ✨",
-    servico: "Oi, Júlia! Quero saber sobre maquiagem para {servico} ✨"
+    padrao: "Oi, Julia! Vi seu site e quero saber sobre uma maquiagem ✨",
+    portfolio: "Oi, Julia! Vi seu portfólio e quero uma make parecida ✨",
+    reservar: "Oi, Julia! Vi seu site e quero reservar minha data ✨",
+    servico: "Oi, Julia! Quero saber sobre maquiagem para {servico} ✨"
   },
 
   // Só aparecem se mostrarPrecos = true. Ex.: noiva: "450"
@@ -34,11 +34,11 @@ const CONFIG = {
   // Na ampliação (lightbox) a foto aparece inteira.
   portfolio: [
     { src: "assets/img/portfolio/make-01.jpg", ocasiao: "Ensaio", posicao: "55% 40%",
-      alt: "Cliente de chapéu preto e lenço vermelho com make de pele bronzeada, esfumado dourado e bronze, cílios marcados, sobrancelhas definidas e boca nude com gloss, feita por Júlia Cardoso" },
+      alt: "Cliente de chapéu preto e lenço vermelho com make de pele bronzeada, esfumado dourado e bronze, cílios marcados, sobrancelhas definidas e boca nude com gloss, feita por Julia Cardoso" },
     { src: "assets/img/portfolio/make-02.jpg", ocasiao: "Festa", posicao: "50% 35%",
-      alt: "Cliente de cabelo longo castanho-avermelhado com make de pele iluminada, olhos em marrom suave com brilho no canto interno e batom rosado com gloss, feita por Júlia Cardoso" },
+      alt: "Cliente de cabelo longo castanho-avermelhado com make de pele iluminada, olhos em marrom suave com brilho no canto interno e batom rosado com gloss, feita por Julia Cardoso" },
     { src: "assets/img/portfolio/make-03.jpg", ocasiao: "Social", posicao: "50% 15%",
-      alt: "Cliente de cabelo longo liso e vestido coral com make de esfumado marrom suave, delineado discreto, pele luminosa e boca nude rosada, feita por Júlia Cardoso" }
+      alt: "Cliente de cabelo longo liso e vestido coral com make de esfumado marrom suave, delineado discreto, pele luminosa e boca nude rosada, feita por Julia Cardoso" }
   ],
 
   // Preencher SOMENTE com depoimentos reais de clientes.
@@ -587,12 +587,12 @@ const CONFIG = {
       const obs = $("#f-obs").value.trim();
 
       const linhas = [
-        "Oi, Júlia! Me chamo " + nome.value.trim() + " ✨",
+        "Oi, Julia! Me chamo " + nome.value.trim() + " ✨",
         "Quero uma maquiagem para: " + ocasiao.value + ".",
         "Data: " + dia + "/" + mes + "/" + ano + "."
       ];
       if (horario) linhas.push("Horário: " + horario + " (aproximado).");
-      if (localEl) linhas.push("Local: " + localEl.value + ".");
+      if (localEl) linhas.push("Onde: " + localEl.value + ".");
       if (obs) linhas.push("Obs: " + obs);
 
       const url = linkWhats(linhas.join("\n"));
