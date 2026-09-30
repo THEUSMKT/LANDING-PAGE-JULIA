@@ -128,8 +128,8 @@ O destaque some quando o texto é preenchido.
 
 **Textos para confirmar com a Julia (`index.html`)**
 - [x] Sobre: texto com a motivação da Julia
-- [ ] Diferencial "Feita para durar": técnicas de fixação `[CONFIRMAR]`
-- [ ] Diferencial "Higiene em primeiro lugar": `[CONFIRMAR]`
+- [x] Diferencial "Feita para durar"
+- [x] Diferencial "Higiene em primeiro lugar"
 - [x] Atendimento: com hora marcada em São Leopoldo ou no local do evento (nunca citar a casa dela)
 - [ ] Dúvidas: tempo da make (`[TEMPO]` social e noiva)
 - [ ] Dúvidas: cílios inclusos ou à parte
