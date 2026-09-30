@@ -30,14 +30,15 @@ const CONFIG = {
   },
 
   // Portfólio: para adicionar uma foto, basta incluir uma linha.
-  // Depois de colocar as fotos, rode o script de otimização (veja o README).
+  // "posicao" (opcional) escolhe o enquadramento da miniatura: "50% 20%" = centro na horizontal, mais para cima.
+  // Na ampliação (lightbox) a foto aparece inteira.
   portfolio: [
-    { src: "assets/img/portfolio/make-01.jpg", alt: "Maquiagem de festa feita por Júlia Cardoso [DESCREVER A FOTO]", ocasiao: "Festa" },
-    { src: "assets/img/portfolio/make-02.jpg", alt: "Maquiagem de noiva feita por Júlia Cardoso [DESCREVER A FOTO]", ocasiao: "Noiva" },
-    { src: "assets/img/portfolio/make-03.jpg", alt: "Maquiagem de formatura feita por Júlia Cardoso [DESCREVER A FOTO]", ocasiao: "Formatura" },
-    { src: "assets/img/portfolio/make-04.jpg", alt: "Maquiagem de 15 anos feita por Júlia Cardoso [DESCREVER A FOTO]", ocasiao: "15 anos" },
-    { src: "assets/img/portfolio/make-05.jpg", alt: "Maquiagem de madrinha feita por Júlia Cardoso [DESCREVER A FOTO]", ocasiao: "Madrinha" },
-    { src: "assets/img/portfolio/make-06.jpg", alt: "Maquiagem para ensaio fotográfico feita por Júlia Cardoso [DESCREVER A FOTO]", ocasiao: "Ensaio" }
+    { src: "assets/img/portfolio/make-01.jpg", ocasiao: "Ensaio", posicao: "55% 40%",
+      alt: "Cliente de chapéu preto e lenço vermelho com make de pele bronzeada, esfumado dourado e bronze, cílios marcados, sobrancelhas definidas e boca nude com gloss, feita por Júlia Cardoso" },
+    { src: "assets/img/portfolio/make-02.jpg", ocasiao: "Festa", posicao: "50% 35%",
+      alt: "Cliente de cabelo longo castanho-avermelhado com make de pele iluminada, olhos em marrom suave com brilho no canto interno e batom rosado com gloss, feita por Júlia Cardoso" },
+    { src: "assets/img/portfolio/make-03.jpg", ocasiao: "Social", posicao: "50% 15%",
+      alt: "Cliente de cabelo longo liso e vestido coral com make de esfumado marrom suave, delineado discreto, pele luminosa e boca nude rosada, feita por Júlia Cardoso" }
   ],
 
   // Preencher SOMENTE com depoimentos reais de clientes.
@@ -355,6 +356,8 @@ const CONFIG = {
     const grade = $("#portfolio-grade");
     const total = CONFIG.portfolio.length;
     CONFIG.portfolio.forEach((item, i) => {
+      // Com número ímpar de fotos, a primeira ocupa a largura toda no celular (ver style.css)
+      const destaque = i === 0 && total % 2 === 1;
       const li = document.createElement("li");
       li.className = "revelar";
 
@@ -365,8 +368,9 @@ const CONFIG = {
       botao.setAttribute("aria-label", "Ampliar foto " + (i + 1) + " de " + total + ": " + item.alt);
       botao.append(
         criarPlaceholder("Make " + pad(i + 1)),
-        criarPicture(item.src, item.alt, "(min-width: 1200px) 390px, (min-width: 768px) 32vw, 50vw", true)
+        criarPicture(item.src, item.alt, "(min-width: 1200px) 390px, (min-width: 768px) 32vw, " + (destaque ? "100vw" : "50vw"), true)
       );
+      if (item.posicao) $("img", botao).style.objectPosition = item.posicao;
 
       if (item.ocasiao) {
         const tag = document.createElement("span");

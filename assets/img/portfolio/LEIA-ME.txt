@@ -1,8 +1,8 @@
-Coloque aqui as fotos dos trabalhos da Júlia:
-  make-01.jpg, make-02.jpg, make-03.jpg, make-04.jpg, make-05.jpg, make-06.jpg
+Fotos dos trabalhos da Júlia: make-01.jpg, make-02.jpg, make-03.jpg...
 
-- Use somente fotos reais de trabalhos dela (nada de banco de imagens).
-- Ideal: foto vertical (proporção 4:5), com 1600px de largura ou mais.
-- Para adicionar mais fotos: salve como make-07.jpg etc. e inclua uma linha em
+- Use somente fotos reais de trabalhos dela (nada de banco de imagens), de clientes
+  que autorizaram aparecer no site.
+- Ideal: foto vertical, com 1600px de largura ou mais (o arquivo original, não o do WhatsApp).
+- Para adicionar: salve como make-04.jpg, make-05.jpg etc. e inclua uma linha em
   CONFIG.portfolio no arquivo js/main.js.
-- Depois de colocar as fotos, rode o otimizador (veja o README.md).
+- As versões WebP são geradas sozinhas na publicação (GitHub Actions).

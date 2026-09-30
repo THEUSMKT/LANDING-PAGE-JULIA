@@ -793,8 +793,11 @@ button { cursor: pointer; }
   gap: 8px;
   margin-top: 40px;
 }
+/* Número ímpar de fotos: a primeira ocupa a linha toda no celular, sem buraco na grade */
+.portfolio__grade > li:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
 @media (min-width: 768px) {
   .portfolio__grade { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .portfolio__grade > li:first-child:nth-last-child(odd) { grid-column: auto; }
 }
 
 /* Identificação */

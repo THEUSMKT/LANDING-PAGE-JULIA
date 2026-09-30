@@ -9,7 +9,7 @@ index.html              página (textos, SEO, dados estruturados)
 css/style.css           visual (cores e fontes no topo, em :root)
 js/main.js              CONFIG (WhatsApp, Instagram, cidade, portfólio...) + interações
 assets/img/             logo, fotos da Júlia, og-image, favicon
-assets/img/portfolio/   fotos dos trabalhos (make-01.jpg ... make-06.jpg)
+assets/img/portfolio/   fotos dos trabalhos (make-01.jpg, make-02.jpg...)
 scripts/                ferramentas de imagem (rodam sozinhas na publicação; não vão para o ar)
 .github/workflows/      publicação automática no GitHub Pages
 ```
@@ -54,8 +54,9 @@ versão anterior no ar.
 1. **Suba os arquivos pelo site do GitHub**: abra a pasta certa no repositório, clique em
    **Add file → Upload files**, arraste as fotos e clique em **Commit changes**. Use estes nomes exatos:
    - `assets/img/logo.png` (já está no repositório; para trocar, suba outro PNG com fundo transparente)
-   - `assets/img/julia-1.jpg` (foto do topo) e `assets/img/julia-2.jpg` (seção "Sobre")
-   - `assets/img/portfolio/make-01.jpg` até `make-06.jpg`
+   - `assets/img/julia-1.jpg` (foto do topo) e `assets/img/julia-2.jpg` (seção "Sobre"). Já estão no ar;
+     para trocar, suba outra com o mesmo nome
+   - `assets/img/portfolio/make-04.jpg`, `make-05.jpg`... (já existem `make-01` a `make-03`)
 
    Use fotos verticais (4:5), com 1600px de largura ou mais. Nada de banco de imagens no portfólio.
 2. **Espere a publicação automática** (aba **Actions**). Ela gera as versões WebP de 800px e 1600px
@@ -63,10 +64,12 @@ versão anterior no ar.
    `og-image.jpg`, o `favicon.png` e o `apple-touch-icon.png`. Se um dia trocar o logo, confira o
    favicon: o recorte do monograma "JS" fica em `RECORTE_MONOGRAMA`, no topo do
    `scripts/preparar-logo.mjs` (dá para editar pelo próprio GitHub, no ícone de lápis).
-3. **Revise os textos alternativos**: em `CONFIG.portfolio` (no `js/main.js`), troque cada
-   `[DESCREVER A FOTO]` por uma descrição curta da make (ex.: "olho esfumado marrom e pele iluminada").
+3. **Inclua uma linha por foto nova** em `CONFIG.portfolio` (no `js/main.js`), com a ocasião e uma
+   descrição curta da make (ex.: "olho esfumado marrom e pele iluminada"). Use as linhas que já estão lá
+   como modelo. `posicao` ajusta o enquadramento da miniatura, se o rosto ficar cortado.
 
-Para ter mais fotos no portfólio, suba `make-07.jpg` e inclua uma linha em `CONFIG.portfolio`.
+Quantidade: com número ímpar de fotos, a primeira ocupa a largura toda no celular. No computador são
+3 por linha, então 3, 6 ou 9 fotos fecham a grade certinho.
 
 Enquanto uma foto não existir, a página mostra um placeholder elegante no lugar dela. Se o WebP ainda
 não foi gerado (por exemplo, abrindo o `index.html` direto no computador), o navegador usa o JPG.
@@ -114,7 +117,7 @@ O destaque some quando o texto é preenchido.
 - [ ] `cidade`: cidade/região
 - [ ] `metaPixelId` (quando for rodar anúncios)
 - [ ] `precos`: valores (só se `mostrarPrecos: true`)
-- [ ] `portfolio`: `[DESCREVER A FOTO]` nas 6 fotos, e a ocasião certa de cada uma
+- [ ] `portfolio`: confirmar a ocasião de cada foto (hoje: make-01 Ensaio, make-02 Festa, make-03 Social)
 - [ ] `depoimentos`: somente depoimentos reais, e então `mostrarDepoimentos: true`
 
 **No `<head>` do `index.html`**
@@ -138,4 +141,5 @@ O destaque some quando o texto é preenchido.
 
 **Imagens**
 - [x] Logo (`logo.png`, recortado com fundo transparente), og-image, favicon e apple-touch-icon
-- [ ] `julia-1.jpg`, `julia-2.jpg`, `make-01.jpg` a `make-06.jpg`
+- [x] Fotos da Júlia (`julia-1.jpg`, `julia-2.jpg`) e 3 fotos de clientes no portfólio
+- [ ] Mais fotos de clientes (opcional), de preferência o arquivo original, em pé e com boa resolução
