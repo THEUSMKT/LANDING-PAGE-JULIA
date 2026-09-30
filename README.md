@@ -117,7 +117,7 @@ O destaque some quando o texto é preenchido.
 - [x] `cidade`: São Leopoldo
 - [ ] `metaPixelId` (quando for rodar anúncios)
 - [ ] `precos`: valores (só se `mostrarPrecos: true`)
-- [ ] `portfolio`: confirmar a ocasião de cada foto (hoje: make-01 Ensaio, make-02 Festa, make-03 Social)
+- [x] `portfolio`: ocasiões confirmadas (make-01 Ensaio, make-02 Festa, make-03 Social)
 - [ ] `depoimentos`: somente depoimentos reais, e então `mostrarDepoimentos: true`
 
 **No `<head>` do `index.html`**
