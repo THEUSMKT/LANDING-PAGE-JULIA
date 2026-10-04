@@ -1,8 +1,8 @@
 # Julia Studio Makeup — landing page
 
 Landing page da **Julia Cardoso**, maquiadora. É um site estático em HTML, CSS e JavaScript puro, sem build.
-Abre direto no navegador e é publicado no **GitHub Pages**:
-**https://theusmkt.github.io/LANDING-PAGE-JULIA/**
+Abre direto no navegador e é publicado no **GitHub Pages**, no domínio próprio:
+**https://juliamakeup.com.br/**
 
 ```
 index.html              página (textos, SEO, dados estruturados)
@@ -44,10 +44,25 @@ Daí em diante, **toda alteração na branch `main` é publicada sozinha** em ce
 Se algo der errado, a execução aparece com um X vermelho na aba **Actions** e o site continua com a
 versão anterior no ar.
 
-> Para um endereço mais curto, dá para renomear o repositório (ex.: `julia-studio-makeup` gera
-> `theusmkt.github.io/julia-studio-makeup/`) ou ligar um domínio próprio em **Settings → Pages → Custom domain**.
-> Nos dois casos, troque o endereço no `<head>` do `index.html` (canonical, og:url, og:image,
-> twitter:image e JSON-LD).
+## Domínio próprio (juliamakeup.com.br)
+
+O domínio foi registrado no [Registro.br](https://registro.br) e aponta para o GitHub Pages:
+
+1. **DNS no Registro.br** (Painel → juliamakeup.com.br → DNS → editar zona, no modo avançado):
+
+   | Tipo | Nome | Valor |
+   |---|---|---|
+   | A | *(em branco: o próprio juliamakeup.com.br)* | `185.199.108.153` |
+   | A | *(em branco)* | `185.199.109.153` |
+   | A | *(em branco)* | `185.199.110.153` |
+   | A | *(em branco)* | `185.199.111.153` |
+   | CNAME | `www` | `theusmkt.github.io` |
+
+2. **GitHub**: Settings → Pages → Custom domain → `juliamakeup.com.br` → Save. Quando aparecer
+   "DNS check successful", marque **Enforce HTTPS**.
+
+O endereço antigo (`theusmkt.github.io/LANDING-PAGE-JULIA/`) passa a redirecionar sozinho para o domínio.
+Se o endereço mudar um dia, troque-o no `<head>` do `index.html`, no `sitemap.xml`, no `robots.txt` e no `CNAME`.
 
 ## Adicionar as fotos
 
@@ -122,8 +137,8 @@ O destaque some quando o texto é preenchido.
 
 **No `<head>` do `index.html`**
 - [x] Cidade no `<title>`, na meta description, no og:title e no twitter:title
-- [ ] Se trocar o endereço do site (repositório renomeado ou domínio próprio): canonical, og:url,
-      og:image, twitter:image e JSON-LD
+- [x] Domínio próprio `juliamakeup.com.br` no `<head>`, sitemap e robots (falta só o DNS e o Custom domain,
+      ver "Domínio próprio")
 - [x] JSON-LD: telefone, São Leopoldo/RS e Instagram (sem endereço, de propósito)
 
 **Textos para confirmar com a Julia (`index.html`)**
