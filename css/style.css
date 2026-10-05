@@ -8,7 +8,7 @@
      4. Header e menu mobile
      5. Hero e faixa
      6. Seções (portfólio, identificação, sobre, diferenciais, serviços,
-        como funciona, formulário, depoimentos, dúvidas, CTA final, rodapé)
+        como funciona, formulário, dúvidas, CTA final, rodapé)
      7. Conversão fixa e lightbox
      8. Animações e movimento reduzido
    ========================================================================== */
@@ -1213,31 +1213,6 @@ button { cursor: pointer; }
   .campo--largo { grid-column: 1 / -1; }
 }
 
-/* Depoimentos (oculta por padrão) */
-.depoimentos { border-top: 1px solid var(--borda); }
-.depoimentos__grade { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
-.depoimentos__grade > li { flex: 1 1 280px; max-width: 380px; }
-.depoimento {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  height: 100%;
-  padding: 28px 24px;
-  border: 1px solid var(--borda);
-  border-radius: 12px;
-  background: var(--card);
-}
-.depoimento__foto { width: 100%; height: auto; border-radius: var(--raio); border: 1px solid var(--borda); }
-.depoimento blockquote {
-  margin: 0;
-  font-family: var(--fonte-titulo);
-  font-style: italic;
-  font-size: 1.3rem;
-  line-height: 1.45;
-}
-.depoimento figcaption { margin-top: auto; font-size: 0.9375rem; color: var(--texto-suave); }
-.depoimento figcaption strong { display: block; font-weight: 500; color: var(--rose); }
-
 /* Dúvidas (accordion) */
 .faq__lista { border-top: 1px solid var(--borda); }
 .faq__item { border-bottom: 1px solid var(--borda); }
@@ -1536,3 +1511,14 @@ button { cursor: pointer; }
   .faixa__lista { flex-wrap: wrap; justify-content: center; white-space: normal; padding-inline: var(--gutter); row-gap: 6px; }
   .metal--brilho { background-position: 110% 0, 0 0; }
 }
+
+/* Consulta de maquiagem */
+.hero__canal { margin-top: 12px; color: var(--texto-suave); font-size: .875rem; }
+.data-indefinida { display: flex; align-items: center; gap: 10px; margin-top: 12px; cursor: pointer; }
+.data-indefinida input { width: 20px; height: 20px; min-height: 0; flex: 0 0 20px; accent-color: var(--rose); }
+.campo input:disabled { opacity: .45; cursor: not-allowed; }
+.consulta-direta { text-align: center; margin-top: 22px; }
+.lightbox__consulta { flex-shrink: 0; position: relative; z-index: 1; font-size: .875rem; text-align: center; }
+.lightbox__foto { width: min(calc(100vw - 32px), calc((100svh - 280px) * .8), 760px); }
+.lightbox { overflow-y: auto; }
+@media (max-height: 480px) { .lightbox { justify-content: flex-start; } }
