@@ -279,8 +279,15 @@
           <p class="secao__texto">Alguns dos trabalhos que já fiz. Nenhuma make é igual à outra, porque nenhuma cliente é.</p>
         </header>
 
-        <!-- A grade é montada pelo js/main.js a partir de CONFIG.portfolio -->
-        <ul class="portfolio__grade" id="portfolio-grade" data-escalonar></ul>
+        <!-- Carrossel com rolagem nativa por toque e navegação por teclado. -->
+        <ul class="portfolio__grade" id="portfolio-grade" tabindex="0" aria-label="Fotos de maquiagens" aria-describedby="portfolio-dica"></ul>
+        <div class="portfolio__navegacao">
+          <p id="portfolio-dica">Deslize para o lado e inspire-se</p>
+          <div class="portfolio__setas">
+            <button class="icone-redonda" id="portfolio-anterior" type="button" aria-label="Ver foto anterior" aria-controls="portfolio-grade"><svg aria-hidden="true"><use href="#i-seta-esq"/></svg></button>
+            <button class="icone-redonda" id="portfolio-proxima" type="button" aria-label="Ver próxima foto" aria-controls="portfolio-grade"><svg aria-hidden="true"><use href="#i-seta-dir"/></svg></button>
+          </div>
+        </div>
         <noscript><p class="secao__texto">Ative o JavaScript para ver o portfólio.</p></noscript>
 
         <div class="portfolio__acoes revelar">

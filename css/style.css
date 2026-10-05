@@ -731,73 +731,59 @@ button { cursor: pointer; }
 
 /* ---------- 6. Seções ---------- */
 
-/* Portfólio */
+/* Portfólio: rolagem horizontal nativa, sem reprodução automática. */
 .portfolio__grade {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rose) transparent;
+  padding: 4px 4px 16px;
 }
+.portfolio__item { flex: 0 0 82%; min-width: 0; scroll-snap-align: start; }
 .portfolio__btn {
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
   padding: 0;
+  overflow: hidden;
   border: 1px solid var(--borda);
   border-radius: var(--raio);
   cursor: zoom-in;
   -webkit-tap-highlight-color: transparent;
 }
-.portfolio__btn img { transition: transform 0.8s var(--ease); }
-/* Gradiente escuro subindo de baixo (não altera a cor da foto: fica só na base, no hover) */
 .portfolio__btn::after {
   content: "";
   position: absolute;
   inset: auto 0 0;
-  height: 50%;
-  background: linear-gradient(to top, rgba(20, 14, 15, 0.85), transparent);
-  opacity: 0;
-  transform: translateY(30%);
-  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  height: 28%;
+  background: linear-gradient(to top, rgba(0, 0, 0, .76), rgba(0, 0, 0, .28) 48%, transparent);
   pointer-events: none;
 }
 .portfolio__tag {
   position: absolute;
-  left: 10px;
-  bottom: 10px;
+  left: 20px;
+  right: 20px;
+  bottom: 22px;
   z-index: 2;
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: rgba(20, 14, 15, 0.72);
   font-family: var(--fonte-rotulo);
-  font-size: 0.625rem;
-  letter-spacing: 0.25em;
+  font-size: clamp(.8rem, 2.8vw, 1rem);
+  letter-spacing: .16em;
   text-transform: uppercase;
-  color: var(--rose-claro);
-  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  color: #fff;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, .35);
+  pointer-events: none;
 }
-.portfolio__btn:active img { transform: scale(1.04); }
-@media (hover: hover) {
-  .portfolio__tag { background: transparent; padding: 0; left: 16px; bottom: 14px; font-size: 0.6875rem; opacity: 0; transform: translateY(10px); }
-  .portfolio__btn:hover img,
-  .portfolio__btn:focus-visible img { transform: scale(1.04); }
-  .portfolio__btn:hover::after,
-  .portfolio__btn:focus-visible::after { opacity: 1; transform: none; }
-  .portfolio__btn:hover .portfolio__tag,
-  .portfolio__btn:focus-visible .portfolio__tag { opacity: 1; transform: none; }
-}
-.portfolio__acoes {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  margin-top: 40px;
-}
-/* Número ímpar de fotos: a primeira ocupa a linha toda no celular, sem buraco na grade */
-.portfolio__grade > li:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
+.portfolio__navegacao { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 14px; }
+.portfolio__navegacao p { color: var(--texto-suave); font-size: .875rem; }
+.portfolio__setas { display: flex; gap: 8px; }
+.portfolio__setas button:disabled { opacity: .3; cursor: default; }
+.portfolio__acoes { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 40px; }
 @media (min-width: 768px) {
-  .portfolio__grade { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-  .portfolio__grade > li:first-child:nth-last-child(odd) { grid-column: auto; }
+  .portfolio__item { flex-basis: 360px; }
 }
 
 /* Identificação */
