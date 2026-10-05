@@ -39,7 +39,7 @@ const CONFIG = {
       alt: "Cliente de cabelo longo castanho-avermelhado com make de pele iluminada, olhos em marrom suave com brilho no canto interno e batom rosado com gloss, feita por Julia Cardoso" },
     { src: "assets/img/portfolio/make-03.jpg", palavra: "Essência", posicao: "50% 15%",
       alt: "Cliente de cabelo longo liso e vestido coral com make de esfumado marrom suave, delineado discreto, pele luminosa e boca nude rosada, feita por Julia Cardoso" },
-    { src: "assets/img/portfolio/make-04.jpg", palavra: "Brilhe", posicao: "50% 35%",
+    { src: "assets/img/portfolio/make-04.jpg", palavra: "Brilho", posicao: "50% 35%",
       alt: "Cliente de cabelos cacheados com delineado e batom rosado, maquiada por Julia Cardoso" }
   ],
 
