@@ -8,25 +8,14 @@ const CONFIG = {
   instagram: "https://www.instagram.com/juliastudio.art/",
   cidade: "São Leopoldo",
 
-  mostrarPrecos: false,      // true = troca "Valor sob consulta" por "a partir de R$ ..." (valores em "precos")
-  mostrarDepoimentos: false, // true = mostra a seção de depoimentos (preencha "depoimentos" antes)
   metaPixelId: "",           // ID do Meta Pixel. Vazio = pixel desligado.
 
   // Mensagens que já vão prontas para o WhatsApp
   mensagens: {
-    padrao: "Oi, Julia! Vi seu site e quero saber sobre uma maquiagem ✨",
+    padrao: "Oi, Júlia! Vi seu site e gostaria de consultar a disponibilidade para uma maquiagem. ✨",
     portfolio: "Oi, Julia! Vi seu portfólio e quero uma make parecida ✨",
     reservar: "Oi, Julia! Vi seu site e quero reservar minha data ✨",
     servico: "Oi, Julia! Quero saber sobre maquiagem para {servico} ✨"
-  },
-
-  // Só aparecem se mostrarPrecos = true. Ex.: noiva: "450"
-  precos: {
-    festa: "[VALOR]",
-    noiva: "[VALOR]",
-    madrinhaFormanda: "[VALOR]",
-    quinzeAnos: "[VALOR]",
-    ensaio: "[VALOR]"
   },
 
   // Portfólio: para adicionar uma foto, basta incluir uma linha.
@@ -43,11 +32,6 @@ const CONFIG = {
       alt: "Cliente de cabelos cacheados com delineado e batom rosado, maquiada por Julia Cardoso" }
   ],
 
-  // Preencher SOMENTE com depoimentos reais de clientes.
-  // "foto" é opcional (foto da cliente ou print da conversa).
-  depoimentos: [
-    // { texto: "Texto real da cliente", nome: "Nome da cliente", ocasiao: "Noiva", foto: "assets/img/depoimentos/cliente-1.jpg", fotoAlt: "Print da conversa com a cliente" },
-  ]
 };
 
 /* ========================================================================== */
@@ -91,7 +75,7 @@ const CONFIG = {
 
   /* GA4 — espaço reservado.
      Para ativar, descomente o bloco abaixo e troque G-XXXXXXXXXX pelo seu ID.
-     Os eventos de WhatsApp e do formulário já são enviados ao GA4 pela função rastrear().
+     Os eventos representam intenções de contato, nunca conversas recebidas ou reservas.
 
   (function () {
     const GA4_ID = "G-XXXXXXXXXX";
@@ -109,9 +93,9 @@ const CONFIG = {
   // Envia o evento para o Meta Pixel (se ativo), GA4 (se ativo) e dataLayer (GTM).
   function rastrear(evento, params) {
     params = params || {};
-    if (typeof window.fbq === "function") window.fbq("track", evento, params);
+    if (typeof window.fbq === "function") window.fbq("trackCustom", evento, params);
     if (typeof window.gtag === "function") {
-      window.gtag("event", evento === "Lead" ? "generate_lead" : "clique_whatsapp", params);
+      window.gtag("event", evento, params);
     }
     if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: evento }, params));
   }
@@ -130,43 +114,6 @@ const CONFIG = {
     });
     $$("[data-cidade]").forEach((el) => { el.textContent = CONFIG.cidade; });
     $$("[data-ano]").forEach((el) => { el.textContent = new Date().getFullYear(); });
-    if (CONFIG.mostrarPrecos) {
-      $$("[data-preco]").forEach((el) => {
-        const valor = CONFIG.precos[el.dataset.preco];
-        if (valor) el.textContent = "a partir de R$ " + valor;
-      });
-    }
-  }
-
-  // Destaca tudo que ainda está [ENTRE COLCHETES] para facilitar a revisão.
-  // Quando os textos forem preenchidos, não sobra nada para destacar.
-  function destacarPendentes() {
-    const regex = /(\[[^\]\n]+\])/;
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-      acceptNode(no) {
-        if (!regex.test(no.nodeValue)) return NodeFilter.FILTER_REJECT;
-        return no.parentElement.closest("script, style, option, select, textarea, noscript, .pendente")
-          ? NodeFilter.FILTER_REJECT
-          : NodeFilter.FILTER_ACCEPT;
-      }
-    });
-    const nos = [];
-    while (walker.nextNode()) nos.push(walker.currentNode);
-    nos.forEach((no) => {
-      const frag = document.createDocumentFragment();
-      no.nodeValue.split(regex).forEach((parte) => {
-        if (!parte) return;
-        if (regex.test(parte)) {
-          const mark = document.createElement("mark");
-          mark.className = "pendente";
-          mark.textContent = parte;
-          frag.append(mark);
-        } else {
-          frag.append(parte);
-        }
-      });
-      no.replaceWith(frag);
-    });
   }
 
   /* ---------- Trava de scroll e bloqueio de fundo (menu e lightbox) ---------- */
@@ -419,6 +366,8 @@ const CONFIG = {
     let aberto = false;
     let gatilho = null;
     let timerTroca = null;
+    const consulta = $("#lightbox-consulta");
+    let referenciaVisivel = 0;
 
     function montar(i) {
       atual = (i + total) % total;
@@ -429,6 +378,9 @@ const CONFIG = {
       img.addEventListener("load", () => caixa.classList.add("carregada"));
       caixa.replaceChildren(criarPlaceholder("Make " + pad(atual + 1)), picture);
       legenda.textContent = item.palavra || "";
+      referenciaVisivel = atual;
+      const imagem = new URL(item.src, "https://juliamakeup.com.br/").href;
+      consulta.href = linkWhats("Oi, Júlia! Gostei da referência ‘" + item.palavra + "’ no seu site e gostaria de conversar sobre uma maquiagem inspirada nela. ✨\n" + imagem);
       contador.textContent = (atual + 1) + " / " + total;
     }
 
@@ -474,7 +426,25 @@ const CONFIG = {
       if (gatilho) gatilho.focus();
     }
 
-    $("#portfolio-grade").addEventListener("click", (e) => {
+    consulta.addEventListener("click", () => {
+      rastrear("consulta_referencia", { referencia: CONFIG.portfolio[referenciaVisivel].palavra });
+    });
+    const trilho = $("#portfolio-grade");
+    let inicioToque = null;
+    let arrastou = false;
+    trilho.addEventListener("pointerdown", (e) => {
+      inicioToque = { x: e.clientX, y: e.clientY, scroll: trilho.scrollLeft };
+      arrastou = false;
+    }, { passive: true });
+    trilho.addEventListener("pointermove", (e) => {
+      if (inicioToque && (Math.abs(e.clientX - inicioToque.x) > 10 || Math.abs(e.clientY - inicioToque.y) > 10)) arrastou = true;
+    }, { passive: true });
+    trilho.addEventListener("pointercancel", () => { arrastou = true; inicioToque = null; });
+    trilho.addEventListener("scroll", () => {
+      if (inicioToque && Math.abs(trilho.scrollLeft - inicioToque.scroll) > 10) arrastou = true;
+    }, { passive: true });
+    trilho.addEventListener("click", (e) => {
+      if (e.detail !== 0 && arrastou) { e.preventDefault(); return; }
       const botao = e.target.closest(".portfolio__btn");
       if (botao) abrir(Number(botao.dataset.indice), botao);
     });
@@ -558,6 +528,13 @@ const CONFIG = {
     const nome = $("#f-nome");
     const ocasiao = $("#f-ocasiao");
     const data = $("#f-data");
+    const semData = $("#f-sem-data");
+    semData.addEventListener("change", () => {
+      data.disabled = semData.checked;
+      data.required = !semData.checked;
+      $("#f-data-obrig").hidden = semData.checked;
+      mostrarErro(data, "");
+    });
     const hoje = dataISO(new Date());
     data.min = hoje;
 
@@ -565,6 +542,7 @@ const CONFIG = {
       [nome, () => (nome.value.trim().length < 2 ? "Me conta seu nome, para eu saber como te chamar." : "")],
       [ocasiao, () => (!ocasiao.value ? "Escolha a ocasião da sua make." : "")],
       [data, () => {
+        if (semData.checked) return "";
         if (data.validity.badInput) return "Data incompleta. Confira dia, mês e ano.";
         if (!data.value) return "Qual é a data do evento?";
         if (data.value < hoje) return "Essa data já passou. Escolha uma data a partir de hoje.";
@@ -610,15 +588,14 @@ const CONFIG = {
       const linhas = [
         "Oi, Julia! Me chamo " + nome.value.trim() + " ✨",
         "Quero uma maquiagem para: " + ocasiao.value + ".",
-        "Data: " + dia + "/" + mes + "/" + ano + "."
+        semData.checked ? "Data: ainda não definida." : "Data: " + dia + "/" + mes + "/" + ano + "."
       ];
       if (horario) linhas.push("Horário: " + horario + " (aproximado).");
       if (localEl) linhas.push("Onde: " + localEl.value + ".");
       if (obs) linhas.push("Obs: " + obs);
 
       const url = linkWhats(linhas.join("\n"));
-      rastrear("Lead", { content_name: "formulario", ocasiao: ocasiao.value });
-      rastrear("Contact", { content_name: "formulario", botao: "formulario" });
+      rastrear("consulta_formulario", { origem: "formulario" });
 
       const janela = window.open(url, "_blank");
       if (janela) janela.opener = null;
@@ -643,43 +620,6 @@ const CONFIG = {
         }
       });
     });
-  }
-
-  /* ---------- Depoimentos (somente se ativado e com depoimentos reais) ---------- */
-  function iniciarDepoimentos() {
-    const lista = CONFIG.depoimentos.filter((d) => d && (d.texto || d.foto));
-    if (!CONFIG.mostrarDepoimentos || !lista.length) return;
-    const ul = $("#depoimentos-lista");
-    lista.slice(0, 3).forEach((d) => {
-      const li = document.createElement("li");
-      li.className = "revelar";
-      const fig = document.createElement("figure");
-      fig.className = "depoimento";
-      if (d.foto) {
-        const img = document.createElement("img");
-        img.className = "depoimento__foto";
-        img.loading = "lazy";
-        img.decoding = "async";
-        img.alt = d.fotoAlt || "Depoimento de " + d.nome;
-        img.src = d.foto;
-        fig.append(img);
-      }
-      if (d.texto) {
-        const bq = document.createElement("blockquote");
-        const p = document.createElement("p");
-        p.textContent = "“" + d.texto + "”";
-        bq.append(p);
-        fig.append(bq);
-      }
-      const cap = document.createElement("figcaption");
-      const strong = document.createElement("strong");
-      strong.textContent = d.nome || "";
-      cap.append(strong, d.ocasiao || "");
-      fig.append(cap);
-      li.append(fig);
-      ul.append(li);
-    });
-    $("#depoimentos").hidden = false;
   }
 
   /* ---------- Animações ---------- */
@@ -717,7 +657,7 @@ const CONFIG = {
       const whats = e.target.closest("[data-wa]");
       if (whats) {
         const origem = whats.dataset.origem || "desconhecido";
-        rastrear("Contact", { content_name: origem, botao: origem });
+        rastrear("clique_whatsapp", { origem });
         return;
       }
       const insta = e.target.closest("[data-instagram]");
@@ -731,8 +671,6 @@ const CONFIG = {
   iniciarPixel();
   aplicarConfig();
   renderizarPortfolio();
-  iniciarDepoimentos();
-  destacarPendentes();
   iniciarHeader();
   iniciarMenu();
   iniciarLightbox();
